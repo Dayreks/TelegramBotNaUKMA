@@ -138,7 +138,7 @@ def menu(update: Update, context: CallbackContext):
 def main():
     print('Start')
     updater = Updater(
-        token='1647854818:AAHkxDcGaklU_DtBbkKRcwV-QGyuUtGVgnI',
+        token='1672955809:AAHbwvoMU9mSGdNJDCPtK63M86qDxoXtmfI',
         use_context=True,
     )
 
