@@ -198,7 +198,7 @@ def start(update: Update, context: CallbackContext):
         resize_keyboard=True,
     )
     update.message.reply_text(
-        text=msg_json["msg_level"],  # Goes first instead of second after message
+        text=msg_json["msg_level"],
         reply_markup=reply_markup,
     )
 

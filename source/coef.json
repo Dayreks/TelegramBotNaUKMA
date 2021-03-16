@@ -1,0 +1,402 @@
+{
+  "FGN": {
+    "HST_032": {
+      "first": {
+        "ukr_mova": 0.2
+      },
+      "second": {
+        "history": 0.5
+      },
+      "third": {
+        "physics": 0.2,
+        "math": 0.2,
+		"foreign": 0.2,
+		"geography": 0.2,
+		"biology": 0.2,
+		"chemistry": 0.2
+      }
+    },
+	"PHIL_033": {
+      "first": {
+        "ukr_mova": 0.3
+      },
+      "second": {
+        "history": 0.3
+      },
+      "third": {
+	    "math": 0.3,
+		"foreign": 0.3,
+		"geography": 0.3,
+		"biology": 0.3,
+		"physics": 0.3,
+		"chemistry": 0.3
+      }
+    },
+	"CULT_034": {
+      "first": {
+        "ukr_mova": 0.3
+      },
+      "second": {
+        "math": 0.3
+      },
+      "third": {
+        "math": 0.3,
+		"foreign": 0.3,
+		"geography": 0.3,
+		"biology": 0.3,
+		"physics": 0.3,
+		"chemistry": 0.3
+      }
+    },
+	"PHILGER_035041": {
+      "first": {
+        "ukr_mova": 0.3
+      },
+      "second": {
+        "foreign": 0.4
+      },
+      "third": {
+        "history": 0.2,
+		"math": 0.2,
+		"biology": 0.2,
+		"geography": 0.2,
+		"physics": 0.2,
+		"chemistry": 0.2
+      }
+    },
+	"PHILUKR_03501": {
+      "first": {
+        "ukr_mova": 0.5
+      },
+      "second": {
+        "foreign": 0.2
+      },
+      "third": {
+        "history": 0.2,
+		"math": 0.2,
+		"biology": 0.2,
+		"geography": 0.2,
+		"physics": 0.2,
+		"chemistry": 0.2
+      }
+    }
+  },
+  "FEN": {
+    "ECON_051": {
+      "first": {
+        "ukr_mova": 0.2
+      },
+      "second": {
+        "math": 0.5
+      },
+      "third": {
+        "history": 0.2,
+		"foreign": 0.2,
+		"biology": 0.2,
+		"geography": 0.2,
+		"physics": 0.2,
+		"chemistry": 0.2
+      }
+    },
+	
+	"FIN_072": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"math": 0.5
+		  },
+		"third": {
+			"foreign": 0.2,
+			"history": 0.2,
+			"biology": 0.2,
+			"geography": 0.2,
+			"physics": 0.2,
+			"chemistry": 0.2
+		  }
+	},
+	
+	"MANAG_073": {
+		"first": {
+			"ukr_mova": 0.2
+		},
+		"second": {
+			"math": 0.5
+		},
+		"third": {
+			"foreign": 0.2,
+			"history": 0.2,
+			"biology": 0.2,
+			"geography": 0.2,
+			"physics": 0.2,
+			"chemistry": 0.2
+		}
+	},
+	
+	"MARKET_075": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"math": 0.5
+		  },
+		"third": {
+			"foreign": 0.2,
+			"history": 0.2,
+			"biology": 0.2,
+			"geography": 0.2,
+			"physics": 0.2,
+			"chemistry": 0.2
+		  }
+	}
+	
+  },
+  
+  "FSNST": {
+    "POLIT_052": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"history": 0.5
+		  },
+		"third": {
+			"foreign": 0.2,
+			"math": 0.2,
+			"biology": 0.2,
+			"geography": 0.2,
+			"physics": 0.2,
+			"chemistry": 0.2
+		  }
+	},
+	
+	"PSYCH_053": {
+		"first": {
+			"ukr_mova": 0.3
+		  },
+		"second": {
+			"math": 0.2
+		  },
+		"third": {
+			"foreign": 0.4,
+			"history": 0.4,
+			"biology": 0.4,
+			"geography": 0.4,
+			"physics": 0.4,
+			"chemistry": 0.4
+		  }
+	},
+	
+	"SOCIO_054": {
+		"first": {
+			"ukr_mova": 0.3
+		  },
+		"second": {
+			"math": 0.3
+		  },
+		"third": {
+			"foreign": 0.3,
+			"history": 0.3,
+			"biology": 0.3,
+			"geography": 0.3,
+			"physics": 0.3,
+			"chemistry": 0.3
+		  }
+	},
+	
+	"JOURN_061": {
+		"first": {
+			"ukr_mova": 0.3
+		  },
+		"second": {
+			"history": 0.3
+		  },
+		"third": {
+			"foreign": 0.3,
+			"math": 0.3,
+			"biology": 0.3,
+			"geography": 0.3,
+			"physics": 0.3,
+			"chemistry": 0.3
+		  }
+	},
+	
+	"SOCSLAVE_231": {
+		"first": {
+			"ukr_mova": 0.4
+		  },
+		"second": {
+			"history": 0.25
+		  },
+		"third": {
+			"foreign": 0.25,
+			"math": 0.25,
+			"biology": 0.25,
+			"geography": 0.25,
+			"physics": 0.25,
+			"chemistry": 0.25
+		  }
+	},
+	
+	"MIJVID_291": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"foreign": 0.4
+		  },
+		"third": {
+			"history": 0.3,
+			"math": 0.3,
+			"biology": 0.3,
+			"geography": 0.3,
+			"physics": 0.3,
+			"chemistry": 0.3
+		  }
+	}
+  },
+  
+  "FPVN": {
+	"PRAVO_081": {
+		"first": {
+			"ukr_mova": 0.3
+		  },
+		"second": {
+			"history": 0.3
+		  },
+		"third": {
+			"foreign": 0.3,
+			"math": 0.3
+		  }
+	}
+  },
+  
+  "FPRN": {
+	"BIOL_091": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"biology": 0.4
+		  },
+		"third": {
+			"foreign": 0.25,
+			"math": 0.25,
+			"history": 0.25,
+			"geography": 0.25,
+			"physics": 0.25,
+			"chemistry": 0.25,
+			"courses": 0.05
+		  }
+	},
+	
+	"ECOL_101": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"biology": 0.4
+		  },
+		"third": {
+			"foreign": 0.25,
+			"math": 0.25,
+			"history": 0.25,
+			"geography": 0.25,
+			"physics": 0.25,
+			"chemistry": 0.25,
+			"courses": 0.05
+		  }
+	},
+	
+	"HIM_102": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"chemistry": 0.4
+		  },
+		"third": {
+			"foreign": 0.3,
+			"math": 0.3,
+			"history": 0.3,
+			"geography": 0.3,
+			"physics": 0.3,
+			"biology": 0.3
+		  }
+	},
+	
+	"PHIS_104": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"math": 0.35
+		  },
+		"third": {
+			"foreign": 0.35,
+			"biology": 0.35,
+			"history": 0.35,
+			"geography": 0.35,
+			"physics": 0.35,
+			"chemistry": 0.35,
+			"courses": 0.05
+		},
+		"fourth": {
+			"attestat": 0.05	
+		}		
+	}
+  },
+  
+  "FI": {
+	"PM_113": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"math": 0.5
+		  },
+		"third": {
+			"foreign": 0.2,
+			"biology": 0.2,
+			"history": 0.2,
+			"geography": 0.2,
+			"physics": 0.2,
+			"chemistry": 0.2
+		  }
+	},
+	
+	"IPZ_121": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"math": 0.5
+		  },
+		"third": {
+			"foreign": 0.2,
+			"biology": 0.2,
+			"history": 0.2,
+			"geography": 0.2,
+			"physics": 0.2,
+			"chemistry": 0.2
+		  }
+	},
+	
+	"KN_122": {
+		"first": {
+			"ukr_mova": 0.2
+		  },
+		"second": {
+			"math": 0.5
+		  },
+		"third": {
+			"foreign": 0.2,
+			"biology": 0.2,
+			"history": 0.2,
+			"geography": 0.2,
+			"physics": 0.2,
+			"chemistry": 0.2
+		  }
+	}
+  }
+}
