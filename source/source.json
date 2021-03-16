@@ -7,8 +7,12 @@
   "btn_hostels": "Гуртожиток",
   "btn_culture": "Корпоративна культура",
   "btn_infrastructure": "Інфраструктура КМА",
-  "btn_contacts": "Наші контакти"
-  },
+  "btn_contacts": "Наші контакти",
+  "btn_bachelor": "Бакалавр",
+  "btn_master": "Магістр",
+  "btn_back": "Назад",
+  "button_student_choice": "Вибір бакалавр/магістр"
+},
 
   "msg": {
     "msg_welcome": "Вітаємо, майбутній студент Могилянки!\nЧим можу допомогти ?",
