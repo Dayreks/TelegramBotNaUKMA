@@ -22,9 +22,9 @@ button_contact = btn_json["btn_contacts"]
 
 def button_contact_handler(update: Update, context: CallbackContext):
     update.message.reply_text(
-        text=msg_json["msg_contact"],
-        reply_markup=menu(update=update, context=context),
+        text=msg_json["msg_contact"]
     )
+    button_back_bachelor_handler(update=update, context=context)
 
 
 button_questions = btn_json["btn_popular"]
@@ -60,10 +60,11 @@ def button_questions_handler(update: Update, context: CallbackContext):
     )
 
 
-button_back = btn_json["btn_back"]
+button_back_bachelor = btn_json["btn_back"]
+button_back_master = btn_json["btn_back"]
 
 
-def button_back_handler(update: Update, context: CallbackContext):
+def button_back_bachelor_handler(update: Update, context: CallbackContext):
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
@@ -72,7 +73,25 @@ def button_back_handler(update: Update, context: CallbackContext):
             ],
             [
                 KeyboardButton(text=button_student_choice),
-                KeyboardButton(text=button_back),
+            ],
+        ],
+        resize_keyboard=True,
+    )
+    update.message.reply_text(
+        text=msg_json["msg_choose"],
+        reply_markup=reply_markup,
+    )
+
+
+def button_back_master_handler(update: Update, context: CallbackContext):
+    reply_markup = ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text=button_contact),
+                KeyboardButton(text=button_questions)
+            ],
+            [
+                KeyboardButton(text=button_student_choice),
             ],
         ],
         resize_keyboard=True,
@@ -94,8 +113,10 @@ def message_handler(update: Update, context: CallbackContext):
         return button_contact_handler(update=update, context=context)
     elif text == button_questions:
         return button_questions_handler(update=update, context=context)
-    elif text == button_back:
-        return button_back_handler(update=update, context=context)
+    elif text == button_back_bachelor:
+        return button_back_bachelor_handler(update=update, context=context)
+    elif text == button_back_master:
+        return button_back_master_handler(update=update, context=context)
     elif text == button_student_choice:
         return start(update=update, context=context)
 
@@ -114,7 +135,6 @@ def menu(update: Update, context: CallbackContext) -> None:
             ],
             [
                 KeyboardButton(text=button_student_choice),
-                KeyboardButton(text=button_back),
             ],
         ],
         resize_keyboard=True,
@@ -137,13 +157,12 @@ def button_bachelor_handler(update: Update, context: CallbackContext):
             ],
             [
                 KeyboardButton(text=button_student_choice),
-                KeyboardButton(text=button_back),
             ],
         ],
         resize_keyboard=True,
     )
     update.message.reply_text(
-        text=msg_json["msg_choose"],
+        text=msg_json["msg_welcome"],
         reply_markup=reply_markup,
     )
 
@@ -157,7 +176,6 @@ def button_master_handler(update: Update, context: CallbackContext):
             ],
             [
                 KeyboardButton(text=button_student_choice),
-                KeyboardButton(text=button_back),
             ],
         ],
         resize_keyboard=True,
@@ -180,7 +198,7 @@ def start(update: Update, context: CallbackContext):
         resize_keyboard=True,
     )
     update.message.reply_text(
-        text=msg_json["msg_choose"],  # Goes first instead of second after message
+        text=msg_json["msg_level"],  # Goes first instead of second after message
         reply_markup=reply_markup,
     )
 
