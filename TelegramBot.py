@@ -3,9 +3,7 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardR
 import logging
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-
-
-
+from source import API_TOKEN, btn_json, msg_json
 
 
 def log_error(f):
@@ -19,30 +17,23 @@ def log_error(f):
     return inner
 
 
-button_contact = 'Наші контакти'
+button_contact = btn_json["btn_contacts"]
 
 
 def button_contact_handler(update: Update, context: CallbackContext):
     update.message.reply_text(
-        text='До кого я можу звернутися з питаннями щодо вступної кампанії? '
-             '\n-Вступ НаУКМА (додати посилання: інста, тікток ..)'
-             '\n-гаряча лінія (?)'
-             '\n-контакти певних відділів (додати посилання)'
-             '\n'
-             '\nДе ще можна знайти відповіді на запитання? Більше відповідей на запитання шукай:'
-             '\nhttps://vstup.ukma.edu.ua/abituriyentam-pro-naukma/zapytannya-ta-vidpovidi/'
-             '\nhttps://www.ukma.edu.ua/index.php/kontakti/153-admission/808-pitannya',
+        text=msg_json["msg_contact"],
         reply_markup=menu(update=update, context=context),
     )
 
 
-button_questions = 'Найбільш популярні запитання'
-button_questions1 = 'Навчальний процес'
-button_questions2 = 'Вступна кампанія'
-button_questions3 = 'Спеціальність'
-button_questions4 = 'Гуртожиток'
-button_questions5 = 'Корпоративна культура'
-button_questions6 = 'Інфраструктура КМА'
+button_questions = btn_json["btn_popular"]
+button_questions1 = btn_json["btn_study_process"]
+button_questions2 = btn_json["btn_vstup"]
+button_questions3 = btn_json["btn_specialty"]
+button_questions4 = btn_json["btn_hostels"]
+button_questions5 = btn_json["btn_culture"]
+button_questions6 = btn_json["btn_infrastructure"]
 
 
 # Inline buttons problems ?
@@ -60,7 +51,7 @@ def button_questions_handler(update: Update, context: CallbackContext):
     )
 
     update.message.reply_text(
-        text='Запитання:',
+        text=msg_json["msg_question"],
         reply_markup=reply_markup
     )
 
@@ -82,7 +73,7 @@ def button_back_handler(update: Update, context: CallbackContext):
         resize_keyboard=True,
     )
     update.message.reply_text(
-        text='Оберіть вашу дію:',
+        text=msg_json["msg_choose"],
         reply_markup=reply_markup,
     )
 
@@ -113,8 +104,7 @@ def start(update: Update, context: CallbackContext) -> None:
         resize_keyboard=True,
     )
     update.message.reply_text(
-        text='Вітаємо, майбутній студент Могилянки!'
-             '\nЧим можу допомогти ?',
+        text=msg_json["msg_welcome"],
         reply_markup=reply_markup,
     )
 
@@ -133,7 +123,7 @@ def menu(update: Update, context: CallbackContext):
         resize_keyboard=True,
     )
     update.message.reply_text(
-        text='Оберіть вашу дію:',  # Goes first instead of second after message
+        text=msg_json["msg_choose"],  # Goes first instead of second after message
         reply_markup=reply_markup,
     )
 
@@ -141,7 +131,7 @@ def menu(update: Update, context: CallbackContext):
 def main():
     print('Start')
     updater = Updater(
-        token='1647854818:AAHkxDcGaklU_DtBbkKRcwV-QGyuUtGVgnI',
+        token=API_TOKEN,
         use_context=True,
     )
 
