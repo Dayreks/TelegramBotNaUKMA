@@ -36,16 +36,20 @@ button_questions5 = btn_json["btn_culture"]
 button_questions6 = btn_json["btn_infrastructure"]
 
 
-# Inline buttons problems ?
 def button_questions_handler(update: Update, context: CallbackContext):
     reply_markup = InlineKeyboardMarkup(
         inline_keyboard=[
             [
-                InlineKeyboardButton(text=button_questions1),
-                InlineKeyboardButton(text=button_questions2)
+                InlineKeyboardButton(text=button_questions1, callback_data='111'),
+                InlineKeyboardButton(text=button_questions2, callback_data='222')
             ],
             [
-                InlineKeyboardButton(text=button_questions3),
+                InlineKeyboardButton(text=button_questions3, callback_data='333'),
+                InlineKeyboardButton(text=button_questions4, callback_data='444')
+            ],
+            [
+                InlineKeyboardButton(text=button_questions5, callback_data='555'),
+                InlineKeyboardButton(text=button_questions6, callback_data='666')
             ]
         ]
     )
@@ -56,7 +60,7 @@ def button_questions_handler(update: Update, context: CallbackContext):
     )
 
 
-button_back = 'Назад'
+button_back = btn_json["btn_back"]
 
 
 def button_back_handler(update: Update, context: CallbackContext):
@@ -67,6 +71,7 @@ def button_back_handler(update: Update, context: CallbackContext):
                 KeyboardButton(text=button_questions)
             ],
             [
+                KeyboardButton(text=button_student_choice),
                 KeyboardButton(text=button_back),
             ],
         ],
@@ -81,15 +86,25 @@ def button_back_handler(update: Update, context: CallbackContext):
 @log_error
 def message_handler(update: Update, context: CallbackContext):
     text = update.message.text
-    if text == button_contact:
+    if text == button_bachelor:
+        return button_bachelor_handler(update=update, context=context)
+    elif text == button_master:
+        return button_master_handler(update=update, context=context)
+    elif text == button_contact:
         return button_contact_handler(update=update, context=context)
     elif text == button_questions:
         return button_questions_handler(update=update, context=context)
     elif text == button_back:
         return button_back_handler(update=update, context=context)
+    elif text == button_student_choice:
+        return start(update=update, context=context)
 
 
-def start(update: Update, context: CallbackContext) -> None:
+button_bachelor = btn_json["btn_bachelor"]
+button_master = btn_json["btn_master"]
+
+
+def menu(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
@@ -98,6 +113,50 @@ def start(update: Update, context: CallbackContext) -> None:
                 KeyboardButton(text=button_questions)
             ],
             [
+                KeyboardButton(text=button_student_choice),
+                KeyboardButton(text=button_back),
+            ],
+        ],
+        resize_keyboard=True,
+    )
+    update.message.reply_text(
+        text=msg_json["msg_choose"],
+        reply_markup=reply_markup,
+    )
+
+
+button_student_choice = btn_json["button_student_choice"]
+
+
+def button_bachelor_handler(update: Update, context: CallbackContext):
+    reply_markup = ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text=button_contact),
+                KeyboardButton(text=button_questions)
+            ],
+            [
+                KeyboardButton(text=button_student_choice),
+                KeyboardButton(text=button_back),
+            ],
+        ],
+        resize_keyboard=True,
+    )
+    update.message.reply_text(
+        text=msg_json["msg_choose"],
+        reply_markup=reply_markup,
+    )
+
+
+def button_master_handler(update: Update, context: CallbackContext):
+    reply_markup = ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text=button_contact),
+                KeyboardButton(text=button_questions)
+            ],
+            [
+                KeyboardButton(text=button_student_choice),
                 KeyboardButton(text=button_back),
             ],
         ],
@@ -109,16 +168,14 @@ def start(update: Update, context: CallbackContext) -> None:
     )
 
 
-def menu(update: Update, context: CallbackContext):
+def start(update: Update, context: CallbackContext):
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
-                KeyboardButton(text=button_contact),
-                KeyboardButton(text=button_questions)
+                KeyboardButton(text=button_bachelor),
+                KeyboardButton(text=button_master)
             ],
-            [
-                KeyboardButton(text=button_back),
-            ],
+
         ],
         resize_keyboard=True,
     )
