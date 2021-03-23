@@ -39,9 +39,9 @@ def button_rating_handler(update: Update, context: CallbackContext):
         [
             InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
             InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
-        ],
-        return InlineKeyboardMarkup(inline_keyboard)
+        ]
     ]
+    return InlineKeyboardMarkup(inline_keyboard)
 
     
 
