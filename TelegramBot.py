@@ -4,8 +4,8 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardR
 import logging
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
-from source import API_TOKEN, btn_json, msg_json
-from queue.quickstart import add_to_table, check_in_queue
+from source import API_TOKEN, btn_json, msg_json, UserState
+from tables import add_to_table, check_in_queue, UserType
 
 
 def log_error(f):
@@ -205,6 +205,35 @@ button_queue_master = btn_json["btn_queue_master"]
 
 ### QUEUE FUNCTION !!!
 
+
+def button_check_handler(update: Update, context: CallbackContext):
+    number = check_in_queue(update.message.chat_id)
+    if number == -1:
+        update.message.reply_text("You are not in queue")
+    else:
+        update.message.reply_text(f"You are {number} in queue")
+
+
+def button_add_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(text=msg_json["msg_queue_start"])
+
+
+def parse_handler(update: Update, context: CallbackContext):
+    state = context.chat_data.get("state")
+    context.chat_data.update(state=UserState.NULL_STATE)
+    message = update.message.text
+    message = message.split(",")
+    if len(message) != 3:
+        context.chat_data.update(state=state)
+        update.message.reply_text(text=msg_json["msg_queue_format_exception"])
+    else:
+        flag = add_to_table(update.message.chat_id, message[0], message[1], message[2], (
+            state == UserState.BACHELOR_WAITING_STATE if UserType.BACHELOR else UserType.MASTER))
+        if flag:
+            update.message.reply_text(text=msg_json["msg_added"])
+        else:
+            update.message.reply_text(text=msg_json["msg_already_added"])
+
 '''
 button_back_bachelor = btn_json["btn_back"]
 button_back_master = btn_json["btn_back_master"]
@@ -253,6 +282,9 @@ def button_back_master_handler(update: Update, context: CallbackContext):
 @log_error
 def message_handler(update: Update, context: CallbackContext):
     text = update.message.text
+    state = context.chat_data.get("state")
+    if state == UserState.BACHELOR_WAITING_STATE:
+        return parse_handler(update=update, context=context)
     if text == button_bachelor:
         return button_bachelor_handler(update=update, context=context)
     if text == button_master:
@@ -274,9 +306,11 @@ def message_handler(update: Update, context: CallbackContext):
     elif text == button_contact_master:
         return button_contact_handler_master(update=update, context=context)
     elif text == button_queue_bachelor:
-        return  # QUEUE FOR BACHELORS
+        context.chat_data.update(state=UserState.BACHELOR_WAITING_STATE)
+        return button_add_handler(update=update, context=context)
     elif text == button_queue_master:
-        return  # QUEUE FOR MASTERS
+        context.chat_data.update(state=UserState.MASTER_WAITING_STATE)
+        return button_add_handler(update=update, context=context)
     elif text == button_rating:
         return  # RATING CALCULATION
     '''    
@@ -336,6 +370,7 @@ def button_master_handler(update: Update, context: CallbackContext):
 
 
 def start(update: Update, context: CallbackContext):
+    context.chat_data.update(state=UserState.NULL_STATE)
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
