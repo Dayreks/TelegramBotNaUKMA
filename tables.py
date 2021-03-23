@@ -8,8 +8,8 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SERVICE_ACCOUNT_FILE = 'keys.json'
 SAMPLE_SPREADSHEET_ID = '1Frcbgjv5cHeauL8ZFzVCpVRFkEqevaTu0qEhhqY8bck'
 
-BACHELOR_RANGE = "bachelor!A1:A1000"
-MASTER_RANGE = "master!A1:A1000"
+BACHELOR_RANGE = "bachelor!A1:E1000"
+MASTER_RANGE = "master!A1:У1000"
 
 credentials = service_account.Credentials.from_service_account_file(
             SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -40,17 +40,22 @@ def add_to_table(chat_id, name, faculty, phone):
 
 
 def check_in_queue(chat_id):
-    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="bachelor!A1:E1000").execute()
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=BACHELOR_RANGE).execute()
     values = result.get('values', [])
     print(values)
 
     i = 0
+    chat_id = str(chat_id)
     for value in values:
-        if str(chat_id) != str(value[0]) and str(value[4]) == "FALSE":
+        id = str(value[0])
+        flag = str(value[4])
+        if chat_id != id and flag == "FALSE":
             i += 1
-        elif str(chat_id) == str(value[0]) and str(value[4] == "FALSE"):
+        elif chat_id == id and flag == "FALSE":
             i += 1
             return i
+        elif chat_id == id and flag == "TRUE":
+            return 0
 
     return -1
 

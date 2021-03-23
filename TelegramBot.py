@@ -230,13 +230,40 @@ def button_queue_handler(update: Update, context: CallbackContext):
 def button_check_handler(update: Update, context: CallbackContext):
     number = check_in_queue(update.message.chat_id)
     if number == -1:
-        update.message.reply_text("You are not in queue")
+        update.message.reply_text(msg_json["msg_not_in_queue"])
+    elif number == 0:
+        update.message.reply_text(msg_json["smg_queue_end"])
     else:
-        update.message.reply_text(f"You are {number} in queue")
+        update.message.reply_text(msg_json["msg_queue_number"].format(number))
 
 
 def button_add_handler(update: Update, context: CallbackContext):
     update.message.reply_text(text=msg_json["msg_queue_start"])
+    context.chat_data.update(state=UserState.BACHELOR_NAME_STATE)
+
+
+def button_add_name_handler(update: Update, context: CallbackContext):
+    context.chat_data.update(name=update.message.text)
+    context.chat_data.update(state=UserState.BACHELOR_DEPARTMENT_STATE)
+    update.message.reply_text(text=msg_json["msg_queue_department"])
+
+
+def button_add_department_handler(update: Update, context: CallbackContext):
+    context.chat_data.update(department=update.message.text)
+    context.chat_data.update(state=UserState.BACHELOR_PHONE_STATE)
+    update.message.reply_text(text=msg_json["msg_queue_phone"])
+
+
+def button_add_phone_handler(update: Update, context: CallbackContext):
+    context.chat_data.update(state=UserState.NULL_STATE)
+    name = context.chat_data.get("name")
+    department = context.chat_data.get("department")
+    phone = update.message.text
+    flag = add_to_table(update.message.chat_id, name, department, phone)
+    if flag:
+        update.message.reply_text(text=msg_json["msg_added"])
+    else:
+        update.message.reply_text(text=msg_json["msg_already_added"])
 
 
 def parse_handler(update: Update, context: CallbackContext):
@@ -304,8 +331,12 @@ def button_back_master_handler(update: Update, context: CallbackContext):
 def message_handler(update: Update, context: CallbackContext):
     text = update.message.text
     state = context.chat_data.get("state")
-    if state == UserState.BACHELOR_WAITING_STATE:
-        return parse_handler(update=update, context=context)
+    if state == UserState.BACHELOR_NAME_STATE:
+        return button_add_name_handler(update=update, context=context)
+    if state == UserState.BACHELOR_DEPARTMENT_STATE:
+        return button_add_department_handler(update=update, context=context)
+    if state == UserState.BACHELOR_PHONE_STATE:
+        return button_add_phone_handler(update=update, context=context)
     if text == button_bachelor:
         return button_bachelor_handler(update=update, context=context)
     if text == button_master:
