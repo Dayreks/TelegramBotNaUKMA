@@ -201,9 +201,30 @@ def callback_query_questions_handler(update: Update, context: CallbackContext):
 
 
 button_queue_bachelor = btn_json["btn_queue"]
-button_queue_master = btn_json["btn_queue_master"]
+button_queue_add = btn_json["btn_queue_add"]
+button_queue_check = btn_json["btn_queue_check"]
+
 
 ### QUEUE FUNCTION !!!
+
+
+def button_queue_handler(update: Update, context: CallbackContext):
+    reply_markup = ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text=button_queue_add),
+                KeyboardButton(text=button_queue_check)
+            ],
+            [
+                KeyboardButton(text=button_back_bachelor),
+            ]
+        ],
+        resize_keyboard=True,
+    )
+    update.message.reply_text(
+        text=msg_json["msg_queue"],
+        reply_markup=reply_markup,
+    )
 
 
 def button_check_handler(update: Update, context: CallbackContext):
@@ -227,15 +248,15 @@ def parse_handler(update: Update, context: CallbackContext):
         context.chat_data.update(state=state)
         update.message.reply_text(text=msg_json["msg_queue_format_exception"])
     else:
-        flag = add_to_table(update.message.chat_id, message[0], message[1], message[2], (
-            state == UserState.BACHELOR_WAITING_STATE if UserType.BACHELOR else UserType.MASTER))
+        flag = add_to_table(update.message.chat_id, message[0], message[1], message[2])
         if flag:
             update.message.reply_text(text=msg_json["msg_added"])
         else:
             update.message.reply_text(text=msg_json["msg_already_added"])
 
-'''
+
 button_back_bachelor = btn_json["btn_back"]
+'''
 button_back_master = btn_json["btn_back_master"]
 
 def button_back_bachelor_handler(update: Update, context: CallbackContext):
@@ -291,6 +312,7 @@ def message_handler(update: Update, context: CallbackContext):
         return button_master_handler(update=update, context=context)
     elif text == button_contact_bachelor:
         return button_contact_handler_bachelor(update=update, context=context)
+    ############################################################
     elif text == button_questions_bachelor:
         update.message.reply_text(
             text=msg_json["msg_question"],
@@ -301,16 +323,22 @@ def message_handler(update: Update, context: CallbackContext):
             text=msg_json["msg_question"],
             reply_markup=button_questions_handler_master(update=update, context=context)
         )
+    ############################################################
     elif text == button_student_choice:
         return start(update=update, context=context)
     elif text == button_contact_master:
         return button_contact_handler_master(update=update, context=context)
+    ############################################################
     elif text == button_queue_bachelor:
+        return button_queue_handler(update=update, context=context)
+    elif text == button_queue_add:
         context.chat_data.update(state=UserState.BACHELOR_WAITING_STATE)
         return button_add_handler(update=update, context=context)
-    elif text == button_queue_master:
-        context.chat_data.update(state=UserState.MASTER_WAITING_STATE)
-        return button_add_handler(update=update, context=context)
+    elif text == button_queue_check:
+        return button_check_handler(update=update, context=context)
+    elif text == button_back_bachelor:
+        return button_bachelor_handler(update=update, context=context)
+    ############################################################
     elif text == button_rating:
         return  # RATING CALCULATION
     '''    

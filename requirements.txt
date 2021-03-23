@@ -32,3 +32,4 @@ watchdog==2.0.2
 win32-setctime==1.0.3
 
 beautifulsoup4~=4.9.1
+

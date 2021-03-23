@@ -22,14 +22,8 @@ class UserType(Enum):
     MASTER = "MASTER"
 
 
-def add_to_table(chat_id, name, faculty, phone, user_type):
-    curr_range = 0
-    if user_type == UserType.BACHELOR:
-        curr_range = BACHELOR_RANGE
-    else:
-        curr_range = MASTER_RANGE
-
-    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=curr_range).execute()
+def add_to_table(chat_id, name, faculty, phone):
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=BACHELOR_RANGE).execute()
     values = result.get('values', [])
 
     for value in values:
@@ -38,17 +32,17 @@ def add_to_table(chat_id, name, faculty, phone, user_type):
 
     data = [[chat_id, name, faculty, phone, "false"]]
     request = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                    range=curr_range,
+                                    range=BACHELOR_RANGE,
                                     valueInputOption="USER_ENTERED",
                                     insertDataOption='INSERT_ROWS',
                                     body={"values": data}).execute()
     return True
 
 
-def check_in_queue(chat_id, user_type):
-    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=(user_type == UserType.BACHELOR if
-                                                                            BACHELOR_RANGE else MASTER_RANGE)).execute()
+def check_in_queue(chat_id):
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="bachelor!A1:E1000").execute()
     values = result.get('values', [])
+    print(values)
 
     i = 0
     for value in values:
