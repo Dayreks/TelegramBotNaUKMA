@@ -5,6 +5,7 @@ import logging
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
 from source import API_TOKEN, btn_json, msg_json
+from queue.quickstart import add_to_table, check_in_queue
 
 
 def log_error(f):
