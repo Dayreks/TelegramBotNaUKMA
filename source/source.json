@@ -27,7 +27,17 @@
   "btn_queue_check" : "Перевірити який я в черзі",
   "btn_documents": "Документи для вступу",
   "btn_documents_master": "Документи для вступу",
-  "btn_rating": "Розрахування середнього балу"
+  "btn_rating": "Розрахування середнього балу",
+  "btn_choose_specialty": "Розрахування середнього балу",
+
+  "fac_list": [
+   {"fi": "ФІ"},
+   {"fgn": "ФГН"},
+   {"fen": "ФЕН"},
+   {"fprn": "ФПрН"},
+   {"fpvn": "ФПвН"},
+   {"fsnst": "ФСНСТ"}
+  ]
 },
 
   "msg": {
@@ -53,6 +63,7 @@
     "msg_queue_department": "Напишіть свій факультет",
     "msg_not_in_queue": "Ви не в черзі",
     "msg_queue_number": "Ви {} в черзі",
-    "smg_queue_end": "Ви вже пройшли"
+    "smg_queue_end": "Ви вже пройшли",
+    "msg_choose_faculty": "Оберіть факультет"
   }
 }

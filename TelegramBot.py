@@ -22,6 +22,28 @@ def log_error(f):
 button_rating = btn_json["btn_rating"]
 
 ## RATING CALCULATION FUNCTION !!!
+def button_rating_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_choose_faculty"]
+    )
+    str info_faculty="fi"
+    inline_keyboard = [
+        [
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+        ],
+        [
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+        ],
+        [
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+        ],
+        return InlineKeyboardMarkup(inline_keyboard)
+    ]
+
+    
 
 button_contact_bachelor = btn_json["btn_contacts"]
 
