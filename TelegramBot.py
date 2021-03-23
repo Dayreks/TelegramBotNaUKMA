@@ -22,6 +22,28 @@ def log_error(f):
 button_rating = btn_json["btn_rating"]
 
 ## RATING CALCULATION FUNCTION !!!
+def button_rating_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_choose_faculty"]
+    )
+    str info_faculty="fi"
+    inline_keyboard = [
+        [
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+        ],
+        [
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+        ],
+        [
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+        ]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard)
+
+    
 
 button_contact_bachelor = btn_json["btn_contacts"]
 
@@ -280,6 +302,7 @@ def parse_handler(update: Update, context: CallbackContext):
             update.message.reply_text(text=msg_json["msg_already_added"])
 
 
+
 button_back_bachelor = btn_json["btn_back"]
 '''
 button_back_master = btn_json["btn_back_master"]
@@ -361,6 +384,7 @@ def message_handler(update: Update, context: CallbackContext):
     elif text == button_queue_bachelor:
         return button_queue_handler(update=update, context=context)
     elif text == button_queue_add:
+
         context.chat_data.update(state=UserState.BACHELOR_WAITING_STATE)
         return button_add_handler(update=update, context=context)
     elif text == button_queue_check:
@@ -369,7 +393,7 @@ def message_handler(update: Update, context: CallbackContext):
         return button_bachelor_handler(update=update, context=context)
     ############################################################
     elif text == button_rating:
-        return  # RATING CALCULATION
+        return  button_rating_handler(update=update, context=context)
     '''    
     elif text == button_back_bachelor:
         return button_back_bachelor_handler(update=update, context=context)
