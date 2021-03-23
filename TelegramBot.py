@@ -26,19 +26,18 @@ def button_rating_handler(update: Update, context: CallbackContext):
     update.message.reply_text(
         text=msg_json["msg_choose_faculty"]
     )
-    str info_faculty="fi"
     inline_keyboard = [
         [
-            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
-            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["fi"], callback_data="data"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["fgn"], callback_data="data"]),
         ],
         [
-            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
-            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["fprn"], callback_data="data"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["fpvn"], callback_data="data"]),
         ],
         [
-            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
-            InlineKeyboardButton(text=btn_json["fac_list"]["{info_faculty}"], callback_data=btn_json["btn_choose_specialty_{info_faculty}"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["fen"], callback_data="data"]),
+            InlineKeyboardButton(text=btn_json["fac_list"]["fsnst"], callback_data="data"]),
         ]
     ]
     return InlineKeyboardMarkup(inline_keyboard)
