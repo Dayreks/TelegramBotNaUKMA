@@ -204,9 +204,7 @@ button_queue_bachelor = btn_json["btn_queue"]
 button_queue_add = btn_json["btn_queue_add"]
 button_queue_check = btn_json["btn_queue_check"]
 
-
 ### QUEUE FUNCTION !!!
-
 
 def button_queue_handler(update: Update, context: CallbackContext):
     reply_markup = ReplyKeyboardMarkup(
