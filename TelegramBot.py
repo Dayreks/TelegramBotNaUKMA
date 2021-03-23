@@ -304,6 +304,7 @@ def parse_handler(update: Update, context: CallbackContext):
             update.message.reply_text(text=msg_json["msg_already_added"])
 
 
+
 button_back_bachelor = btn_json["btn_back"]
 '''
 button_back_master = btn_json["btn_back_master"]
@@ -385,6 +386,7 @@ def message_handler(update: Update, context: CallbackContext):
     elif text == button_queue_bachelor:
         return button_queue_handler(update=update, context=context)
     elif text == button_queue_add:
+
         context.chat_data.update(state=UserState.BACHELOR_WAITING_STATE)
         return button_add_handler(update=update, context=context)
     elif text == button_queue_check:

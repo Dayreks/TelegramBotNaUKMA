@@ -42,7 +42,6 @@ def add_to_table(chat_id, name, faculty, phone):
 def check_in_queue(chat_id):
     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=BACHELOR_RANGE).execute()
     values = result.get('values', [])
-    print(values)
 
     i = 0
     chat_id = str(chat_id)
