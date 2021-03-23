@@ -395,7 +395,7 @@ def message_handler(update: Update, context: CallbackContext):
         return button_bachelor_handler(update=update, context=context)
     ############################################################
     elif text == button_rating:
-        return  # RATING CALCULATION
+        return  button_rating_handler(update=update, context=context)
     '''    
     elif text == button_back_bachelor:
         return button_back_bachelor_handler(update=update, context=context)
