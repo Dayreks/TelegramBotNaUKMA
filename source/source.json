@@ -71,6 +71,8 @@
     "msg_not_in_queue": "Ви не в черзі",
     "msg_queue_number": "Ви {} в черзі",
     "msg_queue_end": "Ви вже пройшли",
+    "msg_choose_speciality": "Оберіть спеціальність",
+    "msg_subject": "Для цієї спеціальності потрібні наступні предмети %s, на вибір %s\nВведіть 4 значення через пробіл:\nбал з першого предмету\nбал з другого предмету\nбал з третього предмету\ncередній бал атестата у 200-бальній системі",
     "msg_choose_faculty": "Оберіть факультет",
     "msg_queue_link":"https://docs.google.com/spreadsheets/d/1Frcbgjv5cHeauL8ZFzVCpVRFkEqevaTu0qEhhqY8bck/edit#gid=0"
   }
