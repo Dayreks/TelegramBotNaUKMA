@@ -4,7 +4,7 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardR
 import logging
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
-from source import API_TOKEN, btn_json, msg_json, UserState
+from source import API_TOKEN, btn_json, msg_json, UserState, faculty_json
 from tables import add_to_table, check_in_queue, UserType
 
 
@@ -21,7 +21,33 @@ def log_error(f):
 
 button_rating = btn_json["btn_rating"]
 
+
 ## RATING CALCULATION FUNCTION !!!
+def button_rating_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_choose_faculty"]
+    )
+
+    keyboard = []
+    temp = []
+    counter = 0
+    for key in faculty_json:
+        temp.append(KeyboardButton(text=faculty_json[key]))
+        counter += 1
+        if counter == 2:
+            keyboard.append(temp)
+            temp = []
+            counter = 0
+
+    reply_markup = ReplyKeyboardMarkup(
+        keyboard=keyboard,
+        resize_keyboard=True,
+    )
+    update.message.reply_text(
+        text=msg_json["msg_welcome"],
+        reply_markup=reply_markup,
+    )
+    
 
 button_contact_bachelor = btn_json["btn_contacts"]
 
@@ -101,103 +127,113 @@ def callback_query_questions_handler(update: Update, context: CallbackContext):
 
     chat_id = update.effective_message.chat_id
 
-    if callback_data == btn_json["btn_study_process"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_student_process"]
-        )
-    elif callback_data == btn_json["btn_vstup"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_vstup"]
-        )
-    elif callback_data == btn_json["btn_dates"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_dates"]
-        )
-    elif callback_data == btn_json["btn_specialty"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_specialty"]
-        )
-    elif callback_data == btn_json["btn_hostels"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_hostels"]
-        )
-    elif callback_data == btn_json["btn_culture"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_culture"]
-        )
-    elif callback_data == btn_json["btn_infrastructure"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_infrastructure"]
-        )
-    elif callback_data == btn_json["btn_documents"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_documents"]
-        )
-    ###############################################################################################
-    if callback_data == btn_json["btn_study_process_master"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_student_process"]
-        )
-    elif callback_data == btn_json["btn_vstup_master"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_vstup"]
-        )
-    elif callback_data == btn_json["btn_dates_master"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_dates"]
-        )
-    elif callback_data == btn_json["btn_specialty_master"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_specialty"]
-        )
-    elif callback_data == btn_json["btn_hostels_master"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_hostels"]
-        )
-    elif callback_data == btn_json["btn_culture_master"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_culture"]
-        )
-    elif callback_data == btn_json["btn_infrastructure_master"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_infrastructure"]
-        )
-    elif callback_data == btn_json["btn_documents_master"]:
-        message_id = update.effective_message.message_id
-        update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-        update.effective_message.reply_text(
-            text=msg_json["msg_documents"]
-        )
+    message_id = update.effective_message.message_id
+    update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+
+    for key in btn_json:
+        if callback_data == btn_json[key]:
+            update.effective_message.reply_text(
+                text=msg_json[key.replace("btn", "msg")]
+            )
+            break
+
+    # if callback_data == btn_json["btn_study_process"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_student_process"]
+    #     )
+    # elif callback_data == btn_json["btn_vstup"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_vstup"]
+    #     )
+    # elif callback_data == btn_json["btn_dates"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_dates"]
+    #     )
+    # elif callback_data == btn_json["btn_specialty"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_specialty"]
+    #     )
+    # elif callback_data == btn_json["btn_hostels"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_hostels"]
+    #     )
+    # elif callback_data == btn_json["btn_culture"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_culture"]
+    #     )
+    # elif callback_data == btn_json["btn_infrastructure"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_infrastructure"]
+    #     )
+    # elif callback_data == btn_json["btn_documents"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_documents"]
+    #     )
+    # ###############################################################################################
+    # if callback_data == btn_json["btn_study_process_master"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_student_process"]
+    #     )
+    # elif callback_data == btn_json["btn_vstup_master"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_vstup"]
+    #     )
+    # elif callback_data == btn_json["btn_dates_master"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_dates"]
+    #     )
+    # elif callback_data == btn_json["btn_specialty_master"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_specialty"]
+    #     )
+    # elif callback_data == btn_json["btn_hostels_master"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_hostels"]
+    #     )
+    # elif callback_data == btn_json["btn_culture_master"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_culture"]
+    #     )
+    # elif callback_data == btn_json["btn_infrastructure_master"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_infrastructure"]
+    #     )
+    # elif callback_data == btn_json["btn_documents_master"]:
+    #     message_id = update.effective_message.message_id
+    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+    #     update.effective_message.reply_text(
+    #         text=msg_json["msg_documents"]
+    #     )
 
 
 button_queue_bachelor = btn_json["btn_queue"]
@@ -282,6 +318,7 @@ def parse_handler(update: Update, context: CallbackContext):
             update.message.reply_text(text=msg_json["msg_already_added"])
 
 
+
 button_back_bachelor = btn_json["btn_back"]
 '''
 button_back_master = btn_json["btn_back_master"]
@@ -363,6 +400,7 @@ def message_handler(update: Update, context: CallbackContext):
     elif text == button_queue_bachelor:
         return button_queue_handler(update=update, context=context)
     elif text == button_queue_add:
+
         context.chat_data.update(state=UserState.BACHELOR_WAITING_STATE)
         return button_add_handler(update=update, context=context)
     elif text == button_queue_check:
@@ -371,7 +409,7 @@ def message_handler(update: Update, context: CallbackContext):
         return button_bachelor_handler(update=update, context=context)
     ############################################################
     elif text == button_rating:
-        return  # RATING CALCULATION
+        return button_rating_handler(update=update, context=context)
     '''    
     elif text == button_back_bachelor:
         return button_back_bachelor_handler(update=update, context=context)
