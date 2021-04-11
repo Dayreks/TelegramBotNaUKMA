@@ -128,21 +128,10 @@ def set_speciality(update: Update, context: CallbackContext):
     speciality_number = update.callback_query.data
     faculty = context.chat_data.get("faculty")
     speciality = get_speciality(faculty)[int(speciality_number)]
-    subjects = get_subject(faculty, speciality)
-    context.chat_data.update(speciality=speciality, state=UserState.SET_RATE)
 
-    main_str = subjects[0] + ", " + subjects[1]
-    optional_str = ""
-    i = 2
-    while i < len(subjects)-1:
-        optional_str = optional_str + subjects[i] + ", "
-        i += 1
-    optional_str += subjects[len(subjects)-1]
-    out_msg = msg_json["msg_subject"] % (main_str, optional_str)
-    print(out_msg)
-    update.effective_message.reply_text(
-        text=out_msg
-    )
+    subject = get_subject(context.chat_data.get("faculty"), speciality)[0]
+    context.chat_data.update(state=UserState.SET_RATE1, speciality=speciality)
+    update.effective_message.reply_text(text=(msg_json["msg_subject"].format(subject)))
 
 
 def callback_query_questions_handler(update: Update, context: CallbackContext):
@@ -254,7 +243,8 @@ def set_faculty(update: Update, context: CallbackContext):
     inline_keyboard = []
     for speciality in specialities:
         inline_keyboard.append([InlineKeyboardButton(text=speciality, callback_data=specialities.index(speciality))])
-    update.message.reply_text(text="Далі", reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text=button_back_bachelor)]]))
+    update.message.reply_text(text="Далі",
+                              reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text=button_back_bachelor)]]))
     update.message.reply_text(text=msg_json["msg_choose_speciality"],
                               reply_markup=InlineKeyboardMarkup(inline_keyboard))
 
@@ -266,6 +256,44 @@ def calculate_rate(update: Update, context: CallbackContext):
     update.message.reply_text(text=result)
 
 
+def set_rate1(update: Update, context: CallbackContext):
+    rate = update.message.text
+    context.chat_data.update(rate1=rate, state=UserState.SET_RATE2)
+    subject = get_subject(context.chat_data.get("faculty"), context.chat_data.get("speciality"))[1]
+    update.effective_message.reply_text(text=(msg_json["msg_subject"].format(subject)))
+
+
+def set_rate2(update: Update, context: CallbackContext):
+    rate = update.message.text
+    context.chat_data.update(rate2=rate, state=UserState.SET_RATE3)
+    subjects = get_subject(context.chat_data.get("faculty"), context.chat_data.get("speciality"))
+    subject = ""
+    i = 2
+    while i < len(subjects) - 1:
+        subject += subjects[i] + ", "
+        i += 1
+    subject += subjects[len(subjects) - 1]
+    update.effective_message.reply_text(text=(msg_json["msg_subject_multiple"].format(subject)))
+
+
+def set_rate3(update: Update, context: CallbackContext):
+    rate = update.message.text
+    context.chat_data.update(rate3=rate, state=UserState.SET_RATE4)
+    update.effective_message.reply_text(text=msg_json["msg_school_rate"])
+
+
+def set_rate4(update: Update, context: CallbackContext):
+    update.effective_message.reply_text(text=calculate_final_rate(
+        context.chat_data.get("faculty"),
+        context.chat_data.get("speciality"),
+        context.chat_data.get("rate1"),
+        context.chat_data.get("rate2"),
+        context.chat_data.get("rate3"),
+        update.message.text
+    ))
+    context.chat_data.update(state=UserState.NULL_STATE)
+
+
 @log_error
 def message_handler(update: Update, context: CallbackContext):
     text = update.message.text
@@ -274,8 +302,14 @@ def message_handler(update: Update, context: CallbackContext):
         return button_bachelor_handler(update=update, context=context)
     if state == UserState.SET_FACULTY:
         return set_faculty(update=update, context=context)
-    if state == UserState.SET_RATE:
-        return calculate_rate(update=update, context=context)
+    if state == UserState.SET_RATE1:
+        return set_rate1(update=update, context=context)
+    if state == UserState.SET_RATE2:
+        return set_rate2(update=update, context=context)
+    if state == UserState.SET_RATE3:
+        return set_rate3(update=update, context=context)
+    if state == UserState.SET_RATE4:
+        return set_rate4(update=update, context=context)
     if state == UserState.BACHELOR_NAME_STATE:
         return button_add_name_handler(update=update, context=context)
     if state == UserState.BACHELOR_DEPARTMENT_STATE:
