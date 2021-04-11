@@ -29,6 +29,7 @@
   "btn_documents_master": "Документи для вступу",
   "btn_rating": "Розрахування середнього балу",
   "btn_choose_specialty": "Розрахування середнього балу",
+  "btn_queue_link":"Гугл таблиця",
 
   "fac_list": {
    "fi": "ФІ",
@@ -69,7 +70,8 @@
     "msg_queue_department": "Напишіть свій факультет",
     "msg_not_in_queue": "Ви не в черзі",
     "msg_queue_number": "Ви {} в черзі",
-    "smg_queue_end": "Ви вже пройшли",
-    "msg_choose_faculty": "Оберіть факультет"
+    "msg_queue_end": "Ви вже пройшли",
+    "msg_choose_faculty": "Оберіть факультет",
+    "msg_queue_link":"https://docs.google.com/spreadsheets/d/1Frcbgjv5cHeauL8ZFzVCpVRFkEqevaTu0qEhhqY8bck/edit#gid=0"
   }
 }

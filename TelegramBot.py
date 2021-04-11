@@ -47,7 +47,7 @@ def button_rating_handler(update: Update, context: CallbackContext):
         text=msg_json["msg_welcome"],
         reply_markup=reply_markup,
     )
-    
+
 
 button_contact_bachelor = btn_json["btn_contacts"]
 
@@ -137,108 +137,11 @@ def callback_query_questions_handler(update: Update, context: CallbackContext):
             )
             break
 
-    # if callback_data == btn_json["btn_study_process"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_student_process"]
-    #     )
-    # elif callback_data == btn_json["btn_vstup"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_vstup"]
-    #     )
-    # elif callback_data == btn_json["btn_dates"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_dates"]
-    #     )
-    # elif callback_data == btn_json["btn_specialty"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_specialty"]
-    #     )
-    # elif callback_data == btn_json["btn_hostels"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_hostels"]
-    #     )
-    # elif callback_data == btn_json["btn_culture"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_culture"]
-    #     )
-    # elif callback_data == btn_json["btn_infrastructure"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_infrastructure"]
-    #     )
-    # elif callback_data == btn_json["btn_documents"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_documents"]
-    #     )
-    # ###############################################################################################
-    # if callback_data == btn_json["btn_study_process_master"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_student_process"]
-    #     )
-    # elif callback_data == btn_json["btn_vstup_master"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_vstup"]
-    #     )
-    # elif callback_data == btn_json["btn_dates_master"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_dates"]
-    #     )
-    # elif callback_data == btn_json["btn_specialty_master"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_specialty"]
-    #     )
-    # elif callback_data == btn_json["btn_hostels_master"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_hostels"]
-    #     )
-    # elif callback_data == btn_json["btn_culture_master"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_culture"]
-    #     )
-    # elif callback_data == btn_json["btn_infrastructure_master"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_infrastructure"]
-    #     )
-    # elif callback_data == btn_json["btn_documents_master"]:
-    #     message_id = update.effective_message.message_id
-    #     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
-    #     update.effective_message.reply_text(
-    #         text=msg_json["msg_documents"]
-    #     )
-
 
 button_queue_bachelor = btn_json["btn_queue"]
 button_queue_add = btn_json["btn_queue_add"]
 button_queue_check = btn_json["btn_queue_check"]
+button_queue_link = btn_json["btn_queue_link"]
 
 
 ### QUEUE FUNCTION !!!
@@ -253,6 +156,7 @@ def button_queue_handler(update: Update, context: CallbackContext):
             ],
             [
                 KeyboardButton(text=button_back_bachelor),
+                KeyboardButton(text=button_queue_link)
             ]
         ],
         resize_keyboard=True,
@@ -263,12 +167,18 @@ def button_queue_handler(update: Update, context: CallbackContext):
     )
 
 
+def button_queue_link_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_queue_link"]
+    )
+
+
 def button_check_handler(update: Update, context: CallbackContext):
     number = check_in_queue(update.message.chat_id)
     if number == -1:
         update.message.reply_text(msg_json["msg_not_in_queue"])
     elif number == 0:
-        update.message.reply_text(msg_json["smg_queue_end"])
+        update.message.reply_text(msg_json["msg_queue_end"])
     else:
         update.message.reply_text(msg_json["msg_queue_number"].format(number))
 
@@ -318,50 +228,7 @@ def parse_handler(update: Update, context: CallbackContext):
             update.message.reply_text(text=msg_json["msg_already_added"])
 
 
-
 button_back_bachelor = btn_json["btn_back"]
-'''
-button_back_master = btn_json["btn_back_master"]
-
-def button_back_bachelor_handler(update: Update, context: CallbackContext):
-    reply_markup = ReplyKeyboardMarkup(
-        keyboard=[
-            [
-                KeyboardButton(text=button_contact_bachelor),
-                KeyboardButton(text=button_questions_bachelor)
-            ],
-            [
-                KeyboardButton(text=button_queue_bachelor),
-                KeyboardButton(text=button_student_choice),
-            ],
-        ],
-        resize_keyboard=True,
-    )
-    update.message.reply_text(
-        text=msg_json["msg_choose"],
-        reply_markup=reply_markup,
-    )
-
-
-def button_back_master_handler(update: Update, context: CallbackContext):
-    reply_markup = ReplyKeyboardMarkup(
-        keyboard=[
-            [
-                KeyboardButton(text=button_contact_master),
-                KeyboardButton(text=button_questions_bachelor)
-            ],
-            [
-                KeyboardButton(text=button_queue_master),
-                KeyboardButton(text=button_student_choice),
-            ],
-        ],
-        resize_keyboard=True,
-    )
-    update.message.reply_text(
-        text=msg_json["msg_choose"],
-        reply_markup=reply_markup,
-    )
-'''
 
 
 @log_error
@@ -407,15 +274,11 @@ def message_handler(update: Update, context: CallbackContext):
         return button_check_handler(update=update, context=context)
     elif text == button_back_bachelor:
         return button_bachelor_handler(update=update, context=context)
+    elif text == button_queue_link:
+        return button_queue_link_handler(update=update, context=context)
     ############################################################
     elif text == button_rating:
         return button_rating_handler(update=update, context=context)
-    '''    
-    elif text == button_back_bachelor:
-        return button_back_bachelor_handler(update=update, context=context)
-    elif text == button_back_master:
-        return button_back_master_handler(update=update, context=context)
-    '''
 
 
 button_bachelor = btn_json["btn_bachelor"]
