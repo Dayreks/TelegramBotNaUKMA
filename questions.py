@@ -1,8 +1,5 @@
-import json
-
-from Rating import get_speciality, get_subject
-from source import btn_json, UserState, msg_json
-from telegram import InlineKeyboardButton, Update, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
+from source import btn_json, msg_json
+from telegram import Update, KeyboardButton, ReplyKeyboardMarkup
 from telegram.ext import CallbackContext
 
 

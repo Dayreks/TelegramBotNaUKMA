@@ -1,5 +1,5 @@
-from source import coef, faculty_json, msg_json, UserState, btn_json
-from telegram import Update, KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
+from source import coef, faculty_json, UserState, msg_json, btn_json
+from telegram import KeyboardButton, ReplyKeyboardMarkup, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
 
 button_back_bachelor = btn_json["btn_back"]
@@ -22,24 +22,18 @@ def get_subject(faculty, speciality):
     return subjects_arr
 
 
-def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
-    try:
-        rate1 = float(rate1)
-        rate2 = float(rate2)
-        rate3 = float(rate3)
-        rate4 = float(rate4)
-    except:
+def calculate_final_rate(faculty, speciality, rate):
+    rate = rate.split(' ')
+    if len(rate) < 4:
         return "Не правильні данні"
-    rates = [rate1, rate2, rate3, rate4]
     result = 0
     subjects = coef[faculty][speciality]
 
     i = 0
     for position in subjects:
-        result += float(list(subjects[position].values())[0]) * float(rates[i])
+        result += float(list(subjects[position].values())[0]) * float(rate[i])
         i += 1
-    result += 0.1 * float(rates[3])
-
+    result += 0.1 * float(rate[3])
     return result
 
 
@@ -89,3 +83,41 @@ def calculate_rate(update: Update, context: CallbackContext):
     result = calculate_final_rate(context.chat_data.get("faculty"), context.chat_data.get("speciality"), text)
     context.chat_data.update(state=UserState.NULL_STATE)
     update.message.reply_text(text=result)
+
+
+def set_rate1(update: Update, context: CallbackContext):
+    rate = update.message.text
+    context.chat_data.update(rate1=rate, state=UserState.SET_RATE2)
+    subject = get_subject(context.chat_data.get("faculty"), context.chat_data.get("speciality"))[1]
+    update.effective_message.reply_text(text=(msg_json["msg_subject"].format(subject)))
+
+
+def set_rate2(update: Update, context: CallbackContext):
+    rate = update.message.text
+    context.chat_data.update(rate2=rate, state=UserState.SET_RATE3)
+    subjects = get_subject(context.chat_data.get("faculty"), context.chat_data.get("speciality"))
+    subject = ""
+    i = 2
+    while i < len(subjects) - 1:
+        subject += subjects[i] + ", "
+        i += 1
+    subject += subjects[len(subjects) - 1]
+    update.effective_message.reply_text(text=(msg_json["msg_subject_multiple"].format(subject)))
+
+
+def set_rate3(update: Update, context: CallbackContext):
+    rate = update.message.text
+    context.chat_data.update(rate3=rate, state=UserState.SET_RATE4)
+    update.effective_message.reply_text(text=msg_json["msg_school_rate"])
+
+
+def set_rate4(update: Update, context: CallbackContext):
+    update.effective_message.reply_text(text=calculate_final_rate(
+        context.chat_data.get("faculty"),
+        context.chat_data.get("speciality"),
+        context.chat_data.get("rate1"),
+        context.chat_data.get("rate2"),
+        context.chat_data.get("rate3"),
+        update.message.text
+    ))
+    context.chat_data.update(state=UserState.NULL_STATE)
