@@ -22,18 +22,24 @@ def get_subject(faculty, speciality):
     return subjects_arr
 
 
-def calculate_final_rate(faculty, speciality, rate):
-    rate = rate.split(' ')
-    if len(rate) < 4:
+def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
+    try:
+        rate1 = float(rate1)
+        rate2 = float(rate2)
+        rate3 = float(rate3)
+        rate4 = float(rate4)
+    except:
         return "Не правильні данні"
+    rates = [rate1, rate2, rate3, rate4]
     result = 0
     subjects = coef[faculty][speciality]
 
     i = 0
     for position in subjects:
-        result += float(list(subjects[position].values())[0]) * float(rate[i])
+        result += float(list(subjects[position].values())[0]) * float(rates[i])
         i += 1
-    result += 0.1 * float(rate[3])
+    result += 0.1 * float(rates[3])
+
     return result
 
 
