@@ -1,4 +1,8 @@
-from source import coef, faculty_json
+from source import coef, faculty_json, msg_json, UserState, btn_json
+from telegram import Update, KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import CallbackContext
+
+button_back_bachelor = btn_json["btn_back"]
 
 
 def get_speciality(faculty):
@@ -31,3 +35,51 @@ def calculate_final_rate(faculty, speciality, rate):
         i += 1
     result += 0.1 * float(rate[3])
     return result
+
+
+# RATING CALCULATION FUNCTION !!!
+def button_rating_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_choose_faculty"]
+    )
+
+    keyboard = []
+    temp = []
+    counter = 0
+    for key in faculty_json:
+        temp.append(KeyboardButton(text=faculty_json[key]))
+        counter += 1
+        if counter == 2:
+            keyboard.append(temp)
+            temp = []
+            counter = 0
+    keyboard.append([KeyboardButton(text=button_back_bachelor)])
+    reply_markup = ReplyKeyboardMarkup(
+        keyboard=keyboard,
+        resize_keyboard=True,
+    )
+    update.message.reply_text(
+        text=msg_json["msg_welcome"],
+        reply_markup=reply_markup,
+    )
+    context.chat_data.update(state=UserState.SET_FACULTY)
+
+
+def set_faculty(update: Update, context: CallbackContext):
+    faculty = update.message.text
+    specialities = get_speciality(faculty)
+    context.chat_data.update(faculty=faculty, state=UserState.SET_SPECIALITY)
+    inline_keyboard = []
+    for speciality in specialities:
+        inline_keyboard.append([InlineKeyboardButton(text=speciality, callback_data=specialities.index(speciality))])
+    update.message.reply_text(text="Далі",
+                              reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text=button_back_bachelor)]]))
+    update.message.reply_text(text=msg_json["msg_choose_speciality"],
+                              reply_markup=InlineKeyboardMarkup(inline_keyboard))
+
+
+def calculate_rate(update: Update, context: CallbackContext):
+    text = update.message.text
+    result = calculate_final_rate(context.chat_data.get("faculty"), context.chat_data.get("speciality"), text)
+    context.chat_data.update(state=UserState.NULL_STATE)
+    update.message.reply_text(text=result)
