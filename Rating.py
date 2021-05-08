@@ -22,27 +22,29 @@ def get_subject(faculty, speciality):
     return subjects_arr
 
 
-def calculate_final_rate(faculty, speciality, rate):
-    rate = rate.split(' ')
-    if len(rate) < 4:
+def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
+    try:
+        rate1 = float(rate1)
+        rate2 = float(rate2)
+        rate3 = float(rate3)
+        rate4 = float(rate4)
+    except:
         return "Не правильні данні"
+    rates = [rate1, rate2, rate3, rate4]
     result = 0
     subjects = coef[faculty][speciality]
 
     i = 0
     for position in subjects:
-        result += float(list(subjects[position].values())[0]) * float(rate[i])
+        result += float(list(subjects[position].values())[0]) * float(rates[i])
         i += 1
-    result += 0.1 * float(rate[3])
+    result += 0.1 * float(rates[3])
+
     return result
 
 
 # RATING CALCULATION FUNCTION !!!
 def button_rating_handler(update: Update, context: CallbackContext):
-    update.message.reply_text(
-        text=msg_json["msg_choose_faculty"]
-    )
-
     keyboard = []
     temp = []
     counter = 0
@@ -59,7 +61,7 @@ def button_rating_handler(update: Update, context: CallbackContext):
         resize_keyboard=True,
     )
     update.message.reply_text(
-        text=msg_json["msg_welcome"],
+        text=msg_json["msg_choose_faculty"],
         reply_markup=reply_markup,
     )
     context.chat_data.update(state=UserState.SET_FACULTY)
@@ -73,7 +75,15 @@ def set_faculty(update: Update, context: CallbackContext):
     for speciality in specialities:
         inline_keyboard.append([InlineKeyboardButton(text=speciality, callback_data=specialities.index(speciality))])
     update.message.reply_text(text="Далі",
-                              reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text=button_back_bachelor)]]))
+                              reply_markup=ReplyKeyboardMarkup(
+                                  keyboard=[
+                                      [
+                                          KeyboardButton(text=button_back_bachelor)
+                                      ],
+                                  ],
+                                  resize_keyboard=True
+                              )
+                              )
     update.message.reply_text(text=msg_json["msg_choose_speciality"],
                               reply_markup=InlineKeyboardMarkup(inline_keyboard))
 
@@ -121,3 +131,33 @@ def set_rate4(update: Update, context: CallbackContext):
         update.message.text
     ))
     context.chat_data.update(state=UserState.NULL_STATE)
+
+
+def set_speciality(update: Update, context: CallbackContext):
+    speciality_number = update.callback_query.data
+    faculty = context.chat_data.get("faculty")
+    speciality = get_speciality(faculty)[int(speciality_number)]
+
+    subject = get_subject(context.chat_data.get("faculty"), speciality)[0]
+    context.chat_data.update(state=UserState.SET_RATE1, speciality=speciality)
+    update.effective_message.reply_text(text=(msg_json["msg_subject"].format(subject)))
+
+
+def callback_query_questions_handler(update: Update, context: CallbackContext):
+    user = update.effective_user
+    callback_data = update.callback_query.data
+    chat_id = update.effective_message.chat_id
+
+    message_id = update.effective_message.message_id
+    update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
+
+    if context.chat_data.get("state") == UserState.SET_SPECIALITY:
+        set_speciality(update=update, context=context)
+        return
+
+    for key in btn_json:
+        if callback_data == btn_json[key]:
+            update.effective_message.reply_text(
+                text=msg_json[key.replace("btn", "msg")]
+            )
+            break
