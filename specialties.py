@@ -132,13 +132,8 @@ button_chemistry_master = btn_json["btn_chemistry_master"]
 button_law_master = btn_json["btn_law_master"]
 button_public_control = btn_json["btn_public_control"]
 button_public_control_communication = btn_json["btn_public_control_communication"]
-
-
-
-
-
-
-
+button_back_speciality = btn_json["btn_back_speciality"]
+button_back_speciality_master = btn_json["btn_back_speciality_master"]
 
 
 def faculty_handler(update: Update, context: CallbackContext, text):
@@ -146,13 +141,16 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_ipz),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_computer),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_math),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality)
                 ]
             ],
             resize_keyboard=True,
@@ -161,13 +159,19 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_marketing),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_managment),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_finance),
+                ],
+                [
+                    KeyboardButton(text=button_economy),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality)
                 ]
             ],
             resize_keyboard=True,
@@ -176,13 +180,25 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_politology),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_sociology),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_social_work),
+                ],
+                [
+                    KeyboardButton(text=button_connections),
+                ],
+                [
+                    KeyboardButton(text=button_psychology),
+                ],
+                [
+                    KeyboardButton(text=button_international),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality)
                 ]
             ],
             resize_keyboard=True,
@@ -191,13 +207,22 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_history),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_philosophy),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_philology_german),
+                ],
+                [
+                    KeyboardButton(text=button_philology_ukrainian),
+                ],
+                [
+                    KeyboardButton(text=button_culturology),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality)
                 ]
             ],
             resize_keyboard=True,
@@ -206,13 +231,10 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_law),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
-                ],
-                [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_back_speciality)
                 ]
             ],
             resize_keyboard=True,
@@ -221,13 +243,19 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_ecology),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_biology),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_chemistry),
+                ],
+                [
+                    KeyboardButton(text=button_physics),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality)
                 ]
             ],
             resize_keyboard=True,
@@ -236,13 +264,16 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_law_master),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_public_control),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_public_control_communication),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality_master)
                 ]
             ],
             resize_keyboard=True,
@@ -251,13 +282,19 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_ipz_master),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_computer_master),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_math_master),
+                ],
+                [
+                    KeyboardButton(text=button_system_analysis),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality_master)
                 ]
             ],
             resize_keyboard=True,
@@ -266,13 +303,22 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_ecology_master),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_biology_molecular),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_biology_laboratory),
+                ],
+                [
+                    KeyboardButton(text=button_physics_master),
+                ],
+                [
+                    KeyboardButton(text=button_chemistry_master),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality_master)
                 ]
             ],
             resize_keyboard=True,
@@ -281,13 +327,25 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_marketing_master),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_management_strategy),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_management_energy),
+                ],
+                [
+                    KeyboardButton(text=button_management_business),
+                ],
+                [
+                    KeyboardButton(text=button_finance_master),
+                ],
+                [
+                    KeyboardButton(text=button_economy_master),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality_master)
                 ]
             ],
             resize_keyboard=True,
@@ -296,13 +354,34 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_politology_master),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_politology_anticorruption),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_sociology_master),
+                ],
+                [
+                    KeyboardButton(text=button_social_work_master),
+                ],
+                [
+                    KeyboardButton(text=button_journalism),
+                ],
+                [
+                    KeyboardButton(text=button_journalism),
+                ],
+                [
+                    KeyboardButton(text=button_psychology_master),
+                ],
+                [
+                    KeyboardButton(text=button_management_health),
+                ],
+                [
+                    KeyboardButton(text=button_management_healthcare),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality_master)
                 ]
             ],
             resize_keyboard=True,
@@ -311,18 +390,36 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_FI_master),
+                    KeyboardButton(text=button_history_master),
                 ],
                 [
-                    KeyboardButton(text=button_FPRN_master),
+                    KeyboardButton(text=button_archeology),
                 ],
                 [
-                    KeyboardButton(text=button_FSNST_master),
+                    KeyboardButton(text=button_udaika),
+                ],
+                [
+                    KeyboardButton(text=button_philosophy_master),
+                ],
+                [
+                    KeyboardButton(text=button_philology_german_master),
+                ],
+                [
+                    KeyboardButton(text=button_philology_ukrainian_master),
+                ],
+                [
+                    KeyboardButton(text=button_philology_ukrainian_history_master),
+                ],
+                [
+                    KeyboardButton(text=button_culturology_master),
+                ],
+                [
+                    KeyboardButton(text=button_back_speciality_master)
                 ]
             ],
             resize_keyboard=True,
         )
     update.message.reply_text(
-        text=msg_json["msg_choose_specialty"],
+        text=msg_json["msg_choose_speciality"],
         reply_markup=reply_markup
     )

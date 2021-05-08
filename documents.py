@@ -1,6 +1,6 @@
 from source import msg_json, btn_json, UserState
 from tables import check_in_queue, add_to_table
-from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
+from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ParseMode
 from telegram.ext import CallbackContext
 
 button_queue_add = btn_json["btn_queue_add"]
@@ -9,13 +9,19 @@ button_queue_link = btn_json["btn_queue_link"]
 button_dates = btn_json["btn_dates"]
 button_required = btn_json["btn_documents"]
 button_back_bachelor = btn_json["btn_back"]
+button_cabinet = btn_json["btn_cabinet"]
+button_cabinet_master = btn_json["btn_cabinet_master"]
+button_originals = btn_json["btn_originals"]
 
 
 def button_documents_handler(update: Update, context: CallbackContext):
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
-                KeyboardButton(text=button_dates),
+                KeyboardButton(text=button_cabinet),
+                KeyboardButton(text=button_originals),
+            ],
+            [
                 KeyboardButton(text=button_required)
             ],
             [
@@ -35,15 +41,59 @@ def button_documents_handler(update: Update, context: CallbackContext):
     )
 
 
-def button_dates_handler(update: Update, context: CallbackContext):
+def button_documents_master_handler(update: Update, context: CallbackContext):
+    reply_markup = ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text=button_cabinet_master),
+                # KeyboardButton(text=button_dates),
+            ],
+            [
+                KeyboardButton(text=button_required),
+                KeyboardButton(text=button_originals)
+            ],
+            [
+                KeyboardButton(text=btn_json["btn_back_questions_master"])
+            ]
+        ],
+        resize_keyboard=True,
+    )
     update.message.reply_text(
-        text=msg_json["msg_dates"]
+        text=msg_json["msg_welcome"],
+        reply_markup=reply_markup,
+    )
+
+
+# def button_dates_handler(update: Update, context: CallbackContext):
+#   update.message.reply_text(
+#       text=msg_json["msg_dates"]
+#    )
+
+def button_cabinet_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_cabinet"]
+    )
+
+
+def button_cabinet_master_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_cabinet_master"]
+    )
+
+
+def button_originals_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_originals"],
+        parse_mode=ParseMode.HTML,
+        disable_web_page_preview=True
     )
 
 
 def button_required_handler(update: Update, context: CallbackContext):
     update.message.reply_text(
-        text=msg_json["msg_documents"]
+        text=msg_json["msg_documents"],
+        parse_mode=ParseMode.HTML,
+        disable_web_page_preview=True
     )
 
 

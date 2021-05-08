@@ -2,8 +2,9 @@ from Rating import get_speciality, calculate_final_rate, set_faculty, calculate_
     set_rate2, set_rate3, set_rate4, callback_query_questions_handler
 from documents import button_documents_handler, button_queue_add, button_queue_check, button_queue_link, button_dates, \
     button_add_name_handler, button_add_department_handler, button_add_phone_handler, button_queue_handler, \
-    button_add_handler, button_check_handler, button_queue_link_handler, button_dates_handler, button_required, \
-    button_required_handler
+    button_add_handler, button_check_handler, button_queue_link_handler, button_required, \
+    button_required_handler, button_cabinet_handler, button_originals_handler, button_cabinet_master_handler, \
+    button_documents_master_handler
 from questions import button_questions_handler_bachelor, button_questions_handler_master
 from source import API_TOKEN, btn_json, msg_json, UserState, faculty_json
 from specialties import button_specialties_handler, button_specialties_master_handler, faculty_handler
@@ -19,7 +20,9 @@ button_questions_bachelor = btn_json["btn_popular"]
 button_questions_master = btn_json["btn_popular_master"]
 button_queue_bachelor = btn_json["btn_queue"]
 button_back_bachelor = btn_json["btn_back"]
-button_back_mater = btn_json["btn_back_master"]
+button_back_master = btn_json["btn_back_master"]
+button_back_speciality = btn_json["btn_back_speciality"]
+button_back_speciality_master = btn_json["btn_back_speciality_master"]
 button_bachelor = btn_json["btn_bachelor"]
 button_master = btn_json["btn_master"]
 button_student_choice = btn_json["btn_student_choice"]
@@ -27,6 +30,10 @@ button_fun = btn_json["btn_fun"]
 button_specialties = btn_json["btn_specialties"]
 button_specialties_master = btn_json["btn_specialties_master"]
 button_documents = btn_json["btn_docs"]
+button_documents_master = btn_json["btn_docs_master"]
+button_cabinet = btn_json["btn_cabinet"]
+button_cabinet_master = btn_json["btn_cabinet_master"]
+button_originals = btn_json["btn_originals"]
 
 button_FI = btn_json["btn_FI"]
 button_FPVN = btn_json["btn_FPVN"]
@@ -100,7 +107,7 @@ def message_handler(update: Update, context: CallbackContext):
         return start(update=update, context=context)
     if text == button_back_bachelor:
         return button_bachelor_handler(update=update, context=context)
-    if text == button_back_mater:
+    if text == button_back_master:
         return button_master_handler(update=update, context=context)
     if state == UserState.SET_FACULTY:
         return set_faculty(update=update, context=context)
@@ -167,10 +174,16 @@ def message_handler(update: Update, context: CallbackContext):
 
     elif text == button_documents:
         return button_documents_handler(update=update, context=context)
-    elif text == button_dates:
-        return button_dates_handler(update=update, context=context)
+    elif text == button_documents_master:
+        return button_documents_master_handler(update=update, context=context)
+    elif text == button_cabinet:
+        return button_cabinet_handler(update=update, context=context)
+    elif text == button_cabinet_master:
+        return button_cabinet_master_handler(update=update, context=context)
     elif text == button_required:
         return button_required_handler(update=update, context=context)
+    elif text == button_originals:
+        return button_originals_handler(update=update, context=context)
 
     ############################################################
 
@@ -182,6 +195,10 @@ def message_handler(update: Update, context: CallbackContext):
             or text == button_FEN or text == button_FGN or text == button_FEN_master or text == button_FSNST_master \
                 or text == button_FGN_master or text == button_FI_master or text == button_FPRN_master or text == button_FPVN_master:
         return faculty_handler(update=update, context=context, text=text)
+    elif text == button_back_speciality:
+        return button_specialties_handler(update=update, context=context)
+    elif text == button_back_speciality_master:
+        return button_specialties_master_handler(update=update, context=context)
 
 
 def button_bachelor_handler(update: Update, context: CallbackContext):
@@ -216,6 +233,9 @@ def button_master_handler(update: Update, context: CallbackContext):
         keyboard=[
             [
                 KeyboardButton(text=button_specialties_master),
+                KeyboardButton(text=button_documents_master)
+            ],
+            [
                 KeyboardButton(text=button_questions_master)
             ],
             [
