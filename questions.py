@@ -1,4 +1,4 @@
-from source import btn_json, msg_json
+from source import btn_json, msg_json, UserState
 from telegram import Update, KeyboardButton, ReplyKeyboardMarkup
 from telegram.ext import CallbackContext
 
@@ -14,6 +14,7 @@ button_vstup_master = btn_json["btn_vstup_master"]
 
 
 def button_questions_handler_bachelor(update: Update, context: CallbackContext):
+    context.chat_data.update(state=UserState.BACHELOR_QUESTIONS)
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
@@ -34,7 +35,8 @@ def button_questions_handler_bachelor(update: Update, context: CallbackContext):
             [
                 KeyboardButton(text=btn_json["btn_back_questions"])
             ]
-        ]
+        ],
+        resize_keyboard=True,
     )
     update.message.reply_text(
         text=msg_json["msg_question"],
@@ -43,6 +45,7 @@ def button_questions_handler_bachelor(update: Update, context: CallbackContext):
 
 
 def button_questions_handler_master(update: Update, context: CallbackContext):
+    context.chat_data.update(state=UserState.MASTER_QUESTIONS)
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
@@ -63,7 +66,8 @@ def button_questions_handler_master(update: Update, context: CallbackContext):
             [
                 KeyboardButton(text=btn_json["btn_back_questions_master"])
             ]
-        ]
+        ],
+        resize_keyboard=True,
     )
     update.message.reply_text(
         text=msg_json["msg_question"],
@@ -120,30 +124,197 @@ button_stages = btn_json["btn_stages"]
 button_cost_study_master = btn_json["btn_cost_study_master"]
 button_evi = btn_json["btn_evi"]
 button_efvv = btn_json["btn_efvv"]
+button_vstup_documents_master = btn_json["btn_vstup_documents_master"]
+
+button_back_questions_menu = btn_json["btn_back_questions_menu"]
+button_back_questions_menu_master = btn_json["btn_back_questions_menu_master"]
 
 
 def details_handler(update: Update, context: CallbackContext, text):
+
+    global reply_markup
+    state = context.chat_data.get("state")
+    if state == UserState.BACHELOR_QUESTIONS:
+        back = button_back_questions_menu
+    elif state == UserState.MASTER_QUESTIONS:
+        back = button_back_questions_menu_master
+
     if text == button_zno:
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_exams),
-                    KeyboardButton(text=button_vstup_master)
+                    KeyboardButton(text=button_rozklad),
+                    KeyboardButton(text=button_registration)
                 ],
                 [
-                    KeyboardButton(text=button_study_process),
-                    KeyboardButton(text=button_hostels)
+                    KeyboardButton(text=button_prep),
+                    KeyboardButton(text=button_dpa_zno)
                 ],
                 [
-                    KeyboardButton(text=button_culture),
-                    KeyboardButton(text=button_infrastructure)
+                    KeyboardButton(text=button_specifics),
+                    KeyboardButton(text=button_results)
                 ],
                 [
-                    KeyboardButton(text=button_operator),
+                    KeyboardButton(text=button_additional),
+                    KeyboardButton(text=back)
                 ]
-            ]
+            ],
+            resize_keyboard=True,
+        )
+    elif text == button_vstup:
+        reply_markup = ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text=button_points),
+                    KeyboardButton(text=button_cost)
+                ],
+                [
+                    KeyboardButton(text=button_vstup_dates),
+                    KeyboardButton(text=button_vstup_documents)
+                ],
+                [
+                    KeyboardButton(text=button_tot),
+                    KeyboardButton(text=button_b_again)
+                ],
+                [
+                    KeyboardButton(text=button_transfer),
+                    KeyboardButton(text=back)
+                ]
+            ],
+            resize_keyboard=True,
+        )
+    elif text == button_exams:
+        reply_markup = ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text=button_exams),
+                    KeyboardButton(text=button_registration_evi)
+                ],
+                [
+                    KeyboardButton(text=button_evi),
+                    KeyboardButton(text=button_efvv)
+                ],
+                [
+                    KeyboardButton(text=back)
+                ]
+            ],
+            resize_keyboard=True,
+        )
+    elif text == button_vstup_master:
+        reply_markup = ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text=button_instruction),
+                    KeyboardButton(text=button_stages)
+                ],
+                [
+                    KeyboardButton(text=button_vstup_documents_master),
+                    KeyboardButton(text=button_b_again)
+                ],
+                [
+                    KeyboardButton(text=button_transfer),
+                    KeyboardButton(text=button_cost_study_master)
+                ],
+                [
+                    KeyboardButton(text=back)
+                ]
+            ],
+            resize_keyboard=True,
+        )
+    elif text == button_study_process:
+        reply_markup = ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text=button_disciplines),
+                    KeyboardButton(text=button_inp)
+                ],
+                [
+                    KeyboardButton(text=button_format),
+                    KeyboardButton(text=button_lection_seminar)
+                ],
+                [
+                    KeyboardButton(text=button_zalik_exam),
+                    KeyboardButton(text=button_scholarship)
+                ],
+                [
+                    KeyboardButton(text=button_work_possibilities),
+                    KeyboardButton(text=button_certificate)
+                ],
+                [
+                    KeyboardButton(text=button_grade_professor),
+                    KeyboardButton(text=button_online)
+                ],
+                [
+                    KeyboardButton(text=button_mobility),
+                    KeyboardButton(text=button_army)
+                ],
+                [
+                        KeyboardButton(text=back)
+                ]
+            ],
+            resize_keyboard=True,
+        )
+    elif text == button_hostels:
+        reply_markup = ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text=button_hostels_amount),
+                    KeyboardButton(text=button_conditions)
+                ],
+                [
+                    KeyboardButton(text=button_items_to_go),
+                    KeyboardButton(text=button_settlement)
+                ],
+                [
+                    KeyboardButton(text=button_cost_living),
+                    KeyboardButton(text=button_documents_settlement)
+                ],
+                [
+                    KeyboardButton(text=button_waivers),
+                    KeyboardButton(text=back)
+                ]
+            ],
+            resize_keyboard=True,
+        )
+    elif text == button_culture:
+        reply_markup = ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text=button_language),
+                    KeyboardButton(text=button_student_body)
+                ],
+                [
+                    KeyboardButton(text=button_corporate_agreement),
+                    KeyboardButton(text=back)
+                ]
+            ],
+            resize_keyboard=True,
+        )
+    elif text == button_infrastructure:
+        reply_markup = ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text=button_buildings),
+                    KeyboardButton(text=button_kmc)
+                ],
+                [
+                    KeyboardButton(text=button_eat_nearby),
+                    KeyboardButton(text=button_coffee)
+                ],
+                [
+                    KeyboardButton(text=button_study),
+                    KeyboardButton(text=back)
+                ],
+            ],
+            resize_keyboard=True,
         )
     update.message.reply_text(
         text=msg_json["msg_question"],
-        reply_markup=reply_markup,
+        reply_markup=reply_markup
+    )
+
+
+def button_operator_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_operator"],
     )

@@ -5,7 +5,8 @@ from documents import button_documents_handler, button_queue_add, button_queue_c
     button_add_handler, button_check_handler, button_queue_link_handler, button_required, \
     button_required_handler, button_cabinet_handler, button_originals_handler, button_cabinet_master_handler, \
     button_documents_master_handler
-from questions import button_questions_handler_bachelor, button_questions_handler_master, details_handler
+from questions import button_questions_handler_bachelor, button_questions_handler_master, details_handler, \
+    button_operator_handler
 from source import API_TOKEN, btn_json, msg_json, UserState, faculty_json
 from specialties import button_specialties_handler, button_specialties_master_handler, faculty_handler
 from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, \
@@ -60,6 +61,10 @@ button_infrastructure = btn_json["btn_infrastructure"]
 button_operator = btn_json["btn_operator"]
 button_exams = btn_json["btn_exams"]
 button_vstup_master = btn_json["btn_vstup_master"]
+
+button_back_questions_menu = btn_json["btn_back_questions_menu"]
+button_back_questions_menu_master = btn_json["btn_back_questions_menu_master"]
+
 
 
 def log_error(f):
@@ -158,10 +163,16 @@ def message_handler(update: Update, context: CallbackContext):
         return button_bachelor_handler(update=update, context=context)
     elif text == btn_json["btn_back_questions_master"]:
         return button_master_handler(update=update, context=context)
-    elif text == button_zno or text == button_exams or text == button_operator \
+    elif text == button_zno or text == button_exams \
             or text == button_culture or text == button_study_process or text == button_hostels \
             or text == button_infrastructure or text == button_vstup or text == button_vstup_master:
         return details_handler(update=update, context=context, text=text)
+    elif text == button_back_questions_menu:
+        return button_questions_handler_bachelor(update=update, context=context)
+    elif text == button_back_questions_menu_master:
+        return button_questions_handler_master(update=update, context=context)
+    elif text == button_operator:
+        return button_operator_handler(update=update, context=context)
 
     ############################################################
 
@@ -216,6 +227,7 @@ def message_handler(update: Update, context: CallbackContext):
 
 
 def button_bachelor_handler(update: Update, context: CallbackContext):
+    context.chat_data.update(state=UserState.NULL_STATE)
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
@@ -243,6 +255,7 @@ def button_bachelor_handler(update: Update, context: CallbackContext):
 
 
 def button_master_handler(update: Update, context: CallbackContext):
+    context.chat_data.update(state=UserState.NULL_STATE)
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
