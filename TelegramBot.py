@@ -5,7 +5,7 @@ from documents import button_documents_handler, button_queue_add, button_queue_c
     button_add_handler, button_check_handler, button_queue_link_handler, button_required, \
     button_required_handler, button_cabinet_handler, button_originals_handler, button_cabinet_master_handler, \
     button_documents_master_handler
-from questions import button_questions_handler_bachelor, button_questions_handler_master
+from questions import button_questions_handler_bachelor, button_questions_handler_master, details_handler
 from source import API_TOKEN, btn_json, msg_json, UserState, faculty_json
 from specialties import button_specialties_handler, button_specialties_master_handler, faculty_handler
 from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, \
@@ -50,6 +50,16 @@ button_FGN_master = btn_json["btn_FGN_master"]
 
 button_info = btn_json["btn_info"]
 button_vstup_info = btn_json["btn_vstup_info"]
+
+button_zno = btn_json["btn_zno"]
+button_vstup = btn_json["btn_vstup"]
+button_study_process = btn_json["btn_study_process"]
+button_hostels = btn_json["btn_hostels"]
+button_culture = btn_json["btn_culture"]
+button_infrastructure = btn_json["btn_infrastructure"]
+button_operator = btn_json["btn_operator"]
+button_exams = btn_json["btn_exams"]
+button_vstup_master = btn_json["btn_vstup_master"]
 
 
 def log_error(f):
@@ -148,6 +158,10 @@ def message_handler(update: Update, context: CallbackContext):
         return button_bachelor_handler(update=update, context=context)
     elif text == btn_json["btn_back_questions_master"]:
         return button_master_handler(update=update, context=context)
+    elif text == button_zno or text == button_exams or text == button_operator \
+            or text == button_culture or text == button_study_process or text == button_hostels \
+            or text == button_infrastructure or text == button_vstup or text == button_vstup_master:
+        return details_handler(update=update, context=context, text=text)
 
     ############################################################
 
@@ -193,7 +207,7 @@ def message_handler(update: Update, context: CallbackContext):
         return button_specialties_master_handler(update=update, context=context)
     elif text == button_FI or text == button_FPRN or text == button_FPVN or text == button_FSNST \
             or text == button_FEN or text == button_FGN or text == button_FEN_master or text == button_FSNST_master \
-                or text == button_FGN_master or text == button_FI_master or text == button_FPRN_master or text == button_FPVN_master:
+            or text == button_FGN_master or text == button_FI_master or text == button_FPRN_master or text == button_FPVN_master:
         return faculty_handler(update=update, context=context, text=text)
     elif text == button_back_speciality:
         return button_specialties_handler(update=update, context=context)
