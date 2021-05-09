@@ -131,14 +131,13 @@ button_back_questions_menu_master = btn_json["btn_back_questions_menu_master"]
 
 
 def details_handler(update: Update, context: CallbackContext, text):
-
-    global reply_markup
     state = context.chat_data.get("state")
     if state == UserState.BACHELOR_QUESTIONS:
         back = button_back_questions_menu
     elif state == UserState.MASTER_QUESTIONS:
         back = button_back_questions_menu_master
 
+###########STAS_BEGIN
     if text == button_zno:
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
@@ -254,6 +253,8 @@ def details_handler(update: Update, context: CallbackContext, text):
             ],
             resize_keyboard=True,
         )
+#############STAS_END
+
     elif text == button_hostels:
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
