@@ -12,7 +12,10 @@ from questions import button_questions_handler_bachelor, button_questions_handle
     button_mobility, button_online, button_grade_professor, button_certificate, button_work_possibilities, \
     button_scholarship, button_zalik_exam, button_lection_seminar, button_format, button_inp, button_disciplines, \
     button_efvv, button_evi, button_registration_evi, button_exams_master, button_cost_study_master, button_instruction, \
-    button_stages, button_vstup_documents_master
+    button_stages, button_vstup_documents_master, button_waivers, button_documents_settlement, button_cost_living, \
+    button_settlement, button_items_to_go, button_conditions, button_hostels_amount, button_language, \
+    button_student_body, button_corporate_agreement, button_stud_organisations, button_study, button_coffee, \
+    button_eat_nearby, button_kmc, button_buildings
 from source import API_TOKEN, btn_json, msg_json, UserState, faculty_json
 from specialties import button_specialties_handler, button_specialties_master_handler, faculty_handler
 from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, \
@@ -185,7 +188,11 @@ def message_handler(update: Update, context: CallbackContext):
                   button_certificate, button_work_possibilities, button_scholarship, button_zalik_exam,
                   button_lection_seminar, button_format, button_inp, button_disciplines, button_efvv, button_evi,
                   button_registration_evi, button_exams_master,
-                  button_cost_study_master, button_instruction, button_stages, button_vstup_documents_master]:
+                  button_cost_study_master, button_instruction, button_stages, button_vstup_documents_master,
+                  button_waivers, button_documents_settlement, button_cost_living, button_settlement,
+                  button_items_to_go, button_conditions, button_hostels_amount,
+                  button_corporate_agreement, button_student_body, button_language,button_stud_organisations,
+                  button_study, button_coffee, button_eat_nearby, button_kmc, button_buildings]:
         return all_button_information_handler(update=update, context=context, text=text)
 
     ############################################################

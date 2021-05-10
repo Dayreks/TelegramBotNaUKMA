@@ -285,7 +285,10 @@ def details_handler(update: Update, context: CallbackContext, text):
                     KeyboardButton(text=button_student_body)
                 ],
                 [
+                    KeyboardButton(text=button_stud_organisations),
                     KeyboardButton(text=button_corporate_agreement),
+                ],
+                [
                     KeyboardButton(text=back)
                 ]
             ],
