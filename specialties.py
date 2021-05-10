@@ -423,3 +423,17 @@ def faculty_handler(update: Update, context: CallbackContext, text):
         text=msg_json["msg_choose_speciality"],
         reply_markup=reply_markup
     )
+
+
+def all_button_speciality_handler(update: Update, context: CallbackContext, text):
+    for key in btn_json.keys():
+        if text == btn_json[key]:
+            text = key
+            break
+
+    text = text.replace("btn", "msg")
+    update.message.reply_text(
+        text=msg_json[text],
+        parse_mode=ParseMode.HTML,
+        disable_web_page_preview=True
+    )

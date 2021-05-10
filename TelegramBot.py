@@ -17,7 +17,27 @@ from questions import button_questions_handler_bachelor, button_questions_handle
     button_student_body, button_corporate_agreement, button_stud_organisations, button_study, button_coffee, \
     button_eat_nearby, button_kmc, button_buildings
 from source import API_TOKEN, btn_json, msg_json, UserState, faculty_json
-from specialties import button_specialties_handler, button_specialties_master_handler, faculty_handler
+from specialties import button_specialties_handler, button_specialties_master_handler, faculty_handler, \
+    all_button_speciality_handler, button_ipz, button_computer, button_math, button_history, button_philology_german, \
+    button_philosophy, button_philology_ukrainian, button_culturology, button_marketing, button_managment, \
+    button_finance, button_economy, \
+    button_politology, button_sociology, button_social_work, button_connections, button_psychology, \
+    button_international, \
+    button_ecology, button_biology, button_chemistry, button_physics, button_law, button_history_master, \
+    button_archeology, \
+    button_udaika, button_philosophy_master, button_philology_german_master, button_philology_ukrainian_master, \
+    button_philology_ukrainian_history_master, \
+    button_culturology_master, button_ipz_master, button_computer_master, button_math_master, button_system_analysis, \
+    button_marketing_master, \
+    button_management_strategy, button_management_energy, button_management_business, button_finance_master, \
+    button_economy_master, \
+    button_politology_master, button_politology_anticorruption, button_sociology_master, button_social_work_master, \
+    button_journalism, \
+    button_journalism_links, button_psychology_master, button_management_health, button_management_healthcare, \
+    button_ecology_master, \
+    button_biology_molecular, button_biology_laboratory, button_physics_master, button_chemistry_master, \
+    button_law_master, \
+    button_public_control, button_public_control_communication, button_back_speciality, button_back_speciality_master
 from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, \
     InlineKeyboardMarkup, ParseMode
 from telegram import Update
@@ -73,7 +93,6 @@ button_vstup_master = btn_json["btn_vstup_master"]
 
 button_back_questions_menu = btn_json["btn_back_questions_menu"]
 button_back_questions_menu_master = btn_json["btn_back_questions_menu_master"]
-
 
 
 def log_error(f):
@@ -172,9 +191,8 @@ def message_handler(update: Update, context: CallbackContext):
         return button_bachelor_handler(update=update, context=context)
     elif text == btn_json["btn_back_questions_master"]:
         return button_master_handler(update=update, context=context)
-    elif text == button_zno or text == button_exams \
-            or text == button_culture or text == button_study_process or text == button_hostels \
-            or text == button_infrastructure or text == button_vstup or text == button_vstup_master:
+    elif text in [button_zno, button_exams, button_culture, button_study_process,
+                  button_hostels, button_infrastructure, button_vstup, button_vstup_master]:
         return details_handler(update=update, context=context, text=text)
     elif text == button_back_questions_menu:
         return button_questions_handler_bachelor(update=update, context=context)
@@ -191,7 +209,7 @@ def message_handler(update: Update, context: CallbackContext):
                   button_cost_study_master, button_instruction, button_stages, button_vstup_documents_master,
                   button_waivers, button_documents_settlement, button_cost_living, button_settlement,
                   button_items_to_go, button_conditions, button_hostels_amount,
-                  button_corporate_agreement, button_student_body, button_language,button_stud_organisations,
+                  button_corporate_agreement, button_student_body, button_language, button_stud_organisations,
                   button_study, button_coffee, button_eat_nearby, button_kmc, button_buildings]:
         return all_button_information_handler(update=update, context=context, text=text)
 
@@ -237,10 +255,31 @@ def message_handler(update: Update, context: CallbackContext):
         return button_specialties_handler(update=update, context=context)
     elif text == button_specialties_master:
         return button_specialties_master_handler(update=update, context=context)
-    elif text == button_FI or text == button_FPRN or text == button_FPVN or text == button_FSNST \
-            or text == button_FEN or text == button_FGN or text == button_FEN_master or text == button_FSNST_master \
-            or text == button_FGN_master or text == button_FI_master or text == button_FPRN_master or text == button_FPVN_master:
+    elif text in [button_FI, button_FPRN, button_FPVN, button_FSNST,
+                  button_FEN, button_FGN, button_FEN_master, button_FSNST_master,
+                  button_FGN_master, button_FI_master, button_FPRN_master, button_FPVN_master]:
         return faculty_handler(update=update, context=context, text=text)
+    elif text in [button_ipz, button_computer, button_math, button_history, button_philosophy, button_philology_german,
+                  button_philology_ukrainian, button_culturology, button_marketing, button_managment, button_finance,
+                  button_economy,
+                  button_politology, button_sociology, button_social_work, button_connections, button_psychology,
+                  button_international,
+                  button_ecology, button_biology, button_chemistry, button_physics, button_law, button_history_master,
+                  button_archeology,
+                  button_udaika, button_philosophy_master, button_philology_german_master,
+                  button_philology_ukrainian_master, button_philology_ukrainian_history_master,
+                  button_culturology_master, button_ipz_master, button_computer_master, button_math_master,
+                  button_system_analysis, button_marketing_master,
+                  button_management_strategy, button_management_energy, button_management_business,
+                  button_finance_master, button_economy_master,
+                  button_politology_master, button_politology_anticorruption, button_sociology_master,
+                  button_social_work_master, button_journalism,
+                  button_journalism_links, button_psychology_master, button_management_health,
+                  button_management_healthcare, button_ecology_master,
+                  button_biology_molecular, button_biology_laboratory, button_physics_master, button_chemistry_master,
+                  button_law_master,
+                  button_public_control, button_public_control_communication]:
+        return all_button_speciality_handler(update=update, context=context, text=text)
     elif text == button_back_speciality:
         return button_specialties_handler(update=update, context=context)
     elif text == button_back_speciality_master:
