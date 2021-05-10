@@ -1,5 +1,5 @@
 from source import btn_json, msg_json, UserState
-from telegram import Update, KeyboardButton, ReplyKeyboardMarkup
+from telegram import Update, KeyboardButton, ReplyKeyboardMarkup, ParseMode
 from telegram.ext import CallbackContext
 
 button_zno = btn_json["btn_zno"]
@@ -186,7 +186,7 @@ def details_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_exams),
+                    KeyboardButton(text=button_exams_master),
                     KeyboardButton(text=button_registration_evi)
                 ],
                 [
@@ -319,3 +319,19 @@ def button_operator_handler(update: Update, context: CallbackContext):
     update.message.reply_text(
         text=msg_json["msg_operator"],
     )
+
+
+def all_button_information_handler(update: Update, context: CallbackContext, text):
+    for key in btn_json.keys():
+        if text == btn_json[key]:
+            text = key
+            break
+
+    text = text.replace("btn", "msg")
+    update.message.reply_text(
+        text=msg_json[text],
+        parse_mode=ParseMode.HTML,
+        disable_web_page_preview=True
+    )
+
+

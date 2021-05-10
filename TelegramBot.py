@@ -6,7 +6,13 @@ from documents import button_documents_handler, button_queue_add, button_queue_c
     button_required_handler, button_cabinet_handler, button_originals_handler, button_cabinet_master_handler, \
     button_documents_master_handler
 from questions import button_questions_handler_bachelor, button_questions_handler_master, details_handler, \
-    button_operator_handler
+    button_operator_handler, button_rozklad, button_registration, button_prep, button_dpa_zno, \
+    button_specifics, button_results, button_additional, all_button_information_handler, button_points, button_cost, \
+    button_vstup_dates, button_vstup_documents, button_tot, button_b_again, button_transfer, button_army, \
+    button_mobility, button_online, button_grade_professor, button_certificate, button_work_possibilities, \
+    button_scholarship, button_zalik_exam, button_lection_seminar, button_format, button_inp, button_disciplines, \
+    button_efvv, button_evi, button_registration_evi, button_exams_master, button_cost_study_master, button_instruction, \
+    button_stages, button_vstup_documents_master
 from source import API_TOKEN, btn_json, msg_json, UserState, faculty_json
 from specialties import button_specialties_handler, button_specialties_master_handler, faculty_handler
 from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, \
@@ -173,6 +179,14 @@ def message_handler(update: Update, context: CallbackContext):
         return button_questions_handler_master(update=update, context=context)
     elif text == button_operator:
         return button_operator_handler(update=update, context=context)
+    elif text in [button_rozklad, button_registration, button_prep, button_dpa_zno, button_specifics, button_results,
+                  button_additional, button_points, button_cost, button_vstup_dates, button_vstup_documents, button_tot,
+                  button_b_again, button_transfer, button_army, button_mobility, button_online, button_grade_professor,
+                  button_certificate, button_work_possibilities, button_scholarship, button_zalik_exam,
+                  button_lection_seminar, button_format, button_inp, button_disciplines, button_efvv, button_evi,
+                  button_registration_evi, button_exams_master,
+                  button_cost_study_master, button_instruction, button_stages, button_vstup_documents_master]:
+        return all_button_information_handler(update=update, context=context, text=text)
 
     ############################################################
 

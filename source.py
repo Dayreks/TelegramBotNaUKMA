@@ -4,6 +4,7 @@ from enum import Enum
 
 source = json.load(open("source/source.json", encoding='utf-8'))
 btn_json = source["btn"]
+
 msg_json = source["msg"]
 faculty_json = source["btn"]["fac_list"]
 
