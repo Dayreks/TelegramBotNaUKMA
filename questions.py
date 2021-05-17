@@ -137,7 +137,7 @@ def details_handler(update: Update, context: CallbackContext, text):
     elif state == UserState.MASTER_QUESTIONS:
         back = button_back_questions_menu_master
 
-###########STAS_BEGIN
+    ###########STAS_BEGIN
     if text == button_zno:
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
@@ -248,12 +248,12 @@ def details_handler(update: Update, context: CallbackContext, text):
                     KeyboardButton(text=button_army)
                 ],
                 [
-                        KeyboardButton(text=back)
+                    KeyboardButton(text=back)
                 ]
             ],
             resize_keyboard=True,
         )
-#############STAS_END
+    #############STAS_END
 
     elif text == button_hostels:
         reply_markup = ReplyKeyboardMarkup(
@@ -314,8 +314,9 @@ def details_handler(update: Update, context: CallbackContext, text):
         )
     update.message.reply_text(
         text=msg_json["msg_question"],
-        reply_markup=reply_markup
+        reply_markup=reply_markup,
     )
+
 
 
 def button_operator_handler(update: Update, context: CallbackContext):
@@ -336,5 +337,3 @@ def all_button_information_handler(update: Update, context: CallbackContext, tex
         parse_mode=ParseMode.HTML,
         disable_web_page_preview=True
     )
-
-
