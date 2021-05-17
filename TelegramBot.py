@@ -24,20 +24,18 @@ from specialties import button_specialties_handler, button_specialties_master_ha
     button_politology, button_sociology, button_social_work, button_connections, button_psychology, \
     button_international, \
     button_ecology, button_biology, button_chemistry, button_physics, button_law, button_history_master, \
-    button_archeology, \
-    button_udaika, button_philosophy_master, button_philology_german_master, button_philology_ukrainian_master, \
-    button_philology_ukrainian_history_master, \
+    button_philosophy_master, button_philology_german_master, button_philology_ukrainian_master, \
     button_culturology_master, button_ipz_master, button_computer_master, button_math_master, button_system_analysis, \
     button_marketing_master, \
-    button_management_strategy, button_management_energy, button_management_business, button_finance_master, \
+    button_management_strategy, button_finance_master, \
     button_economy_master, \
-    button_politology_master, button_politology_anticorruption, button_sociology_master, button_social_work_master, \
+    button_politology_master, button_sociology_master, button_social_work_master, \
     button_journalism, \
-    button_journalism_links, button_psychology_master, button_management_health, button_management_healthcare, \
+    button_psychology_master, button_management_health, \
     button_ecology_master, \
-    button_biology_molecular, button_biology_laboratory, button_physics_master, button_chemistry_master, \
+    button_biology_molecular, button_physics_master, button_chemistry_master, \
     button_law_master, \
-    button_public_control, button_public_control_communication, button_back_speciality, button_back_speciality_master
+    button_public_control, button_back_speciality, button_back_speciality_master
 from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, \
     InlineKeyboardMarkup, ParseMode
 from telegram import Update
@@ -265,20 +263,19 @@ def message_handler(update: Update, context: CallbackContext):
                   button_politology, button_sociology, button_social_work, button_connections, button_psychology,
                   button_international,
                   button_ecology, button_biology, button_chemistry, button_physics, button_law, button_history_master,
-                  button_archeology,
-                  button_udaika, button_philosophy_master, button_philology_german_master,
-                  button_philology_ukrainian_master, button_philology_ukrainian_history_master,
+                  button_philosophy_master, button_philology_german_master,
+                  button_philology_ukrainian_master,
                   button_culturology_master, button_ipz_master, button_computer_master, button_math_master,
                   button_system_analysis, button_marketing_master,
-                  button_management_strategy, button_management_energy, button_management_business,
+                  button_management_strategy,
                   button_finance_master, button_economy_master,
-                  button_politology_master, button_politology_anticorruption, button_sociology_master,
+                  button_politology_master, button_sociology_master,
                   button_social_work_master, button_journalism,
-                  button_journalism_links, button_psychology_master, button_management_health,
-                  button_management_healthcare, button_ecology_master,
-                  button_biology_molecular, button_biology_laboratory, button_physics_master, button_chemistry_master,
+                  button_psychology_master, button_management_health,
+                  button_ecology_master,
+                  button_biology_molecular, button_physics_master, button_chemistry_master,
                   button_law_master,
-                  button_public_control, button_public_control_communication]:
+                  button_public_control]:
         return all_button_speciality_handler(update=update, context=context, text=text)
     elif text == button_back_speciality:
         return button_specialties_handler(update=update, context=context)

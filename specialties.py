@@ -98,12 +98,9 @@ button_chemistry = btn_json["btn_chemistry"]
 button_physics = btn_json["btn_physics"]
 button_law = btn_json["btn_law"]
 button_history_master = btn_json["btn_history_master"]
-button_archeology = btn_json["btn_archeology"]
-button_udaika = btn_json["btn_udaika"]
 button_philosophy_master = btn_json["btn_philosophy_master"]
 button_philology_german_master = btn_json["btn_philology_german_master"]
 button_philology_ukrainian_master = btn_json["btn_philology_ukrainian_master"]
-button_philology_ukrainian_history_master = btn_json["btn_philology_ukrainian_history_master"]
 button_culturology_master = btn_json["btn_culturology_master"]
 button_ipz_master = btn_json["btn_ipz_master"]
 button_computer_master = btn_json["btn_computer_master"]
@@ -111,27 +108,20 @@ button_math_master = btn_json["btn_math_master"]
 button_system_analysis = btn_json["btn_system_analysis"]
 button_marketing_master = btn_json["btn_marketing_master"]
 button_management_strategy = btn_json["btn_management_strategy"]
-button_management_energy = btn_json["btn_management_energy"]
-button_management_business = btn_json["btn_management_business"]
 button_finance_master = btn_json["btn_finance_master"]
 button_economy_master = btn_json["btn_economy_master"]
 button_politology_master = btn_json["btn_politology_master"]
-button_politology_anticorruption = btn_json["btn_politology_anticorruption"]
 button_sociology_master = btn_json["btn_sociology_master"]
 button_social_work_master = btn_json["btn_social_work_master"]
 button_journalism = btn_json["btn_journalism"]
-button_journalism_links = btn_json["btn_journalism_links"]
 button_psychology_master = btn_json["btn_psychology_master"]
 button_management_health = btn_json["btn_management_health"]
-button_management_healthcare = btn_json["btn_management_healthcare"]
 button_ecology_master = btn_json["btn_ecology_master"]
 button_biology_molecular = btn_json["btn_biology_molecular"]
-button_biology_laboratory = btn_json["btn_biology_laboratory"]
 button_physics_master = btn_json["btn_physics_master"]
 button_chemistry_master = btn_json["btn_chemistry_master"]
 button_law_master = btn_json["btn_law_master"]
 button_public_control = btn_json["btn_public_control"]
-button_public_control_communication = btn_json["btn_public_control_communication"]
 button_back_speciality = btn_json["btn_back_speciality"]
 button_back_speciality_master = btn_json["btn_back_speciality_master"]
 
@@ -270,9 +260,6 @@ def faculty_handler(update: Update, context: CallbackContext, text):
                     KeyboardButton(text=button_public_control),
                 ],
                 [
-                    KeyboardButton(text=button_public_control_communication),
-                ],
-                [
                     KeyboardButton(text=button_back_speciality_master)
                 ]
             ],
@@ -309,9 +296,6 @@ def faculty_handler(update: Update, context: CallbackContext, text):
                     KeyboardButton(text=button_biology_molecular),
                 ],
                 [
-                    KeyboardButton(text=button_biology_laboratory),
-                ],
-                [
                     KeyboardButton(text=button_physics_master),
                 ],
                 [
@@ -333,12 +317,6 @@ def faculty_handler(update: Update, context: CallbackContext, text):
                     KeyboardButton(text=button_management_strategy),
                 ],
                 [
-                    KeyboardButton(text=button_management_energy),
-                ],
-                [
-                    KeyboardButton(text=button_management_business),
-                ],
-                [
                     KeyboardButton(text=button_finance_master),
                 ],
                 [
@@ -357,9 +335,6 @@ def faculty_handler(update: Update, context: CallbackContext, text):
                     KeyboardButton(text=button_politology_master),
                 ],
                 [
-                    KeyboardButton(text=button_politology_anticorruption),
-                ],
-                [
                     KeyboardButton(text=button_sociology_master),
                 ],
                 [
@@ -369,16 +344,10 @@ def faculty_handler(update: Update, context: CallbackContext, text):
                     KeyboardButton(text=button_journalism),
                 ],
                 [
-                    KeyboardButton(text=button_journalism),
-                ],
-                [
                     KeyboardButton(text=button_psychology_master),
                 ],
                 [
                     KeyboardButton(text=button_management_health),
-                ],
-                [
-                    KeyboardButton(text=button_management_healthcare),
                 ],
                 [
                     KeyboardButton(text=button_back_speciality_master)
@@ -393,12 +362,6 @@ def faculty_handler(update: Update, context: CallbackContext, text):
                     KeyboardButton(text=button_history_master),
                 ],
                 [
-                    KeyboardButton(text=button_archeology),
-                ],
-                [
-                    KeyboardButton(text=button_udaika),
-                ],
-                [
                     KeyboardButton(text=button_philosophy_master),
                 ],
                 [
@@ -406,9 +369,6 @@ def faculty_handler(update: Update, context: CallbackContext, text):
                 ],
                 [
                     KeyboardButton(text=button_philology_ukrainian_master),
-                ],
-                [
-                    KeyboardButton(text=button_philology_ukrainian_history_master),
                 ],
                 [
                     KeyboardButton(text=button_culturology_master),
