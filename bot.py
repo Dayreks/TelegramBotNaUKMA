@@ -368,6 +368,9 @@ def button_fun_handler(update: Update, context: CallbackContext):
 
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open("Memes/Instagram post - "+str(n)+".png","rb"))
 
+    update.message.reply_text(
+        text="Хочеш ще? (Натисни знову)"
+    )
 
 def main():
     print('Start')
