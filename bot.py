@@ -1,3 +1,5 @@
+import pathlib
+
 from Rating import get_speciality, calculate_final_rate, set_faculty, calculate_rate, button_rating_handler, set_rate1, \
     set_rate2, set_rate3, set_rate4, callback_query_questions_handler
 from documents import button_documents_handler, button_queue_add, button_queue_check, button_queue_link, button_dates, \
@@ -37,9 +39,10 @@ from specialties import button_specialties_handler, button_specialties_master_ha
     button_law_master, \
     button_public_control, button_back_speciality, button_back_speciality_master
 from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, \
-    InlineKeyboardMarkup, ParseMode
+    InlineKeyboardMarkup, ParseMode, PhotoSize, InputMediaPhoto
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
+import random
 
 button_start = btn_json["btn_start"]
 button_rating = btn_json["btn_rating"]
@@ -281,6 +284,8 @@ def message_handler(update: Update, context: CallbackContext):
         return button_specialties_handler(update=update, context=context)
     elif text == button_back_speciality_master:
         return button_specialties_master_handler(update=update, context=context)
+    elif text == button_fun:
+        return button_fun_handler(update=update, context=context)
 
 
 def button_bachelor_handler(update: Update, context: CallbackContext):
@@ -356,6 +361,12 @@ def start(update: Update, context: CallbackContext):
         text=msg_json["msg_choose"],
         reply_markup=reply_markup,
     )
+
+
+def button_fun_handler(update: Update, context: CallbackContext):
+    n = random.randint(15, 57)
+
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open("Memes/Instagram post - "+str(n)+".png","rb"))
 
 
 def main():
