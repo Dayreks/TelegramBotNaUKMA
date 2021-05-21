@@ -28,6 +28,11 @@ def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
         rate2 = float(rate2)
         rate3 = float(rate3)
         rate4 = float(rate4) * 200 / 12
+
+        if rate1 <= 0.0 or rate1 > 200.0 or rate2 <= 0.0 or rate2 > 200.0 or \
+                rate3 <= 0.0 or rate3 > 200.0 or rate4 <= 0.0 or rate4 > 200.0:
+            raise Exception('Неправильні дані')
+
     except:
         return "Неправильні дані"
     rates = [rate1, rate2, rate3, rate4]
