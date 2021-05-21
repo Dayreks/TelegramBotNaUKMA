@@ -122,7 +122,8 @@ def button_contact_handler(update: Update, context: CallbackContext):
     )
     update.message.reply_text(
         text=msg_json["msg_choose"],
-        reply_markup=reply_markup
+        reply_markup=reply_markup,
+        parse_mode= ParseMode.HTML
     )
 
 
