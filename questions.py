@@ -125,17 +125,24 @@ button_cost_study_master = btn_json["btn_cost_study_master"]
 button_evi = btn_json["btn_evi"]
 button_efvv = btn_json["btn_efvv"]
 button_vstup_documents_master = btn_json["btn_vstup_documents_master"]
+button_what_hostels = btn_json["btn_what_hostels"]
+button_grading = btn_json["btn_grading"]
 
 button_back_questions_menu = btn_json["btn_back_questions_menu"]
 button_back_questions_menu_master = btn_json["btn_back_questions_menu_master"]
 
 
 def details_handler(update: Update, context: CallbackContext, text):
+    global back,hostels
     state = context.chat_data.get("state")
     if state == UserState.BACHELOR_QUESTIONS:
         back = button_back_questions_menu
+        hostels = button_hostels_amount
     elif state == UserState.MASTER_QUESTIONS:
         back = button_back_questions_menu_master
+        hostels = button_what_hostels
+
+
 
     ###########STAS_BEGIN
     if text == button_zno:
@@ -248,6 +255,7 @@ def details_handler(update: Update, context: CallbackContext, text):
                     KeyboardButton(text=button_army)
                 ],
                 [
+                    KeyboardButton(text=button_grading),
                     KeyboardButton(text=back)
                 ]
             ],
@@ -259,7 +267,7 @@ def details_handler(update: Update, context: CallbackContext, text):
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text=button_hostels_amount),
+                    KeyboardButton(text=hostels),
                     KeyboardButton(text=button_conditions)
                 ],
                 [

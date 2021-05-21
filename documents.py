@@ -36,7 +36,7 @@ def button_documents_handler(update: Update, context: CallbackContext):
         resize_keyboard=True,
     )
     update.message.reply_text(
-        text=msg_json["msg_welcome"],
+        text=msg_json["msg_choose"],
         reply_markup=reply_markup,
     )
 
@@ -59,7 +59,7 @@ def button_documents_master_handler(update: Update, context: CallbackContext):
         resize_keyboard=True,
     )
     update.message.reply_text(
-        text=msg_json["msg_welcome"],
+        text=msg_json["msg_choose"],
         reply_markup=reply_markup,
     )
 
@@ -135,8 +135,10 @@ def button_check_handler(update: Update, context: CallbackContext):
 
 
 def button_add_handler(update: Update, context: CallbackContext):
-    update.message.reply_text(text=msg_json["msg_queue_start"])
-    context.chat_data.update(state=UserState.BACHELOR_NAME_STATE)
+    update.message.reply_text(text=msg_json["msg_queue_start"], parse_mode=ParseMode.HTML)
+    available = False
+    if available:
+        context.chat_data.update(state=UserState.BACHELOR_NAME_STATE)
 
 
 def button_add_name_handler(update: Update, context: CallbackContext):

@@ -17,7 +17,7 @@ from questions import button_questions_handler_bachelor, button_questions_handle
     button_stages, button_vstup_documents_master, button_waivers, button_documents_settlement, button_cost_living, \
     button_settlement, button_items_to_go, button_conditions, button_hostels_amount, button_language, \
     button_student_body, button_corporate_agreement, button_stud_organisations, button_study, button_coffee, \
-    button_eat_nearby, button_kmc, button_buildings
+    button_eat_nearby, button_kmc, button_buildings, button_what_hostels, button_grading
 from source import API_TOKEN, btn_json, msg_json, UserState, faculty_json
 from specialties import button_specialties_handler, button_specialties_master_handler, faculty_handler, \
     all_button_speciality_handler, button_ipz, button_computer, button_math, button_history, button_philology_german, \
@@ -211,7 +211,8 @@ def message_handler(update: Update, context: CallbackContext):
                   button_waivers, button_documents_settlement, button_cost_living, button_settlement,
                   button_items_to_go, button_conditions, button_hostels_amount,
                   button_corporate_agreement, button_student_body, button_language, button_stud_organisations,
-                  button_study, button_coffee, button_eat_nearby, button_kmc, button_buildings]:
+                  button_study, button_coffee, button_eat_nearby, button_kmc, button_buildings, button_what_hostels,
+                  button_grading]:
         return all_button_information_handler(update=update, context=context, text=text)
 
     ############################################################
@@ -366,11 +367,13 @@ def start(update: Update, context: CallbackContext):
 def button_fun_handler(update: Update, context: CallbackContext):
     n = random.randint(15, 57)
 
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open("Memes/Instagram post - "+str(n)+".png","rb"))
+    context.bot.send_photo(chat_id=update.effective_chat.id,
+                           photo=open("Memes/Instagram post - " + str(n) + ".png", "rb"))
 
     update.message.reply_text(
         text="Хочеш ще? (Натисни знову)"
     )
+
 
 def main():
     print('Start')

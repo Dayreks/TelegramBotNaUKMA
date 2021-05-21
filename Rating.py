@@ -29,7 +29,7 @@ def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
         rate3 = float(rate3)
         rate4 = float(rate4)
     except:
-        return "Не правильні данні"
+        return "Неправильні дані"
     rates = [rate1, rate2, rate3, rate4]
     result = 0
     subjects = coef[faculty][speciality]
