@@ -124,11 +124,13 @@ def button_queue_link_handler(update: Update, context: CallbackContext):
     available = False
     if available:
         update.message.reply_text(
-            text=msg_json["msg_queue_link"]
+            text=msg_json["msg_queue_link"],
+            parse_mode=ParseMode.HTML,
         )
     else:
         update.message.reply_text(
-            text=msg_json["msg_queue_start"]
+            text=msg_json["msg_queue_start"],
+            parse_mode=ParseMode.HTML,
         )
 
 
