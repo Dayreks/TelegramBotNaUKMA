@@ -27,7 +27,7 @@ def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
         rate1 = float(rate1)
         rate2 = float(rate2)
         rate3 = float(rate3)
-        rate4 = float(rate4)*200/12
+        rate4 = float(rate4) * 200 / 12
     except:
         return "Неправильні дані"
     rates = [rate1, rate2, rate3, rate4]
@@ -40,7 +40,7 @@ def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
         i += 1
     result += 0.1 * float(rates[3])
 
-    return result
+    return round(result, 2)
 
 
 # RATING CALCULATION FUNCTION !!!
