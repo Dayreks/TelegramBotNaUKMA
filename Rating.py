@@ -45,7 +45,7 @@ def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
         i += 1
     result += 0.1 * float(rates[3])
 
-    return round(result, 2)
+    return round(result, 3)
 
 
 # RATING CALCULATION FUNCTION !!!
