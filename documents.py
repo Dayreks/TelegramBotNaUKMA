@@ -119,9 +119,15 @@ def button_queue_handler(update: Update, context: CallbackContext):
 
 
 def button_queue_link_handler(update: Update, context: CallbackContext):
-    update.message.reply_text(
-        text=msg_json["msg_queue_link"]
-    )
+    available = False
+    if available:
+        update.message.reply_text(
+            text=msg_json["msg_queue_link"]
+        )
+    else:
+        update.message.reply_text(
+            text=msg_json["msg_queue_start"]
+        )
 
 
 def button_check_handler(update: Update, context: CallbackContext):
