@@ -71,13 +71,15 @@ def button_documents_master_handler(update: Update, context: CallbackContext):
 
 def button_cabinet_handler(update: Update, context: CallbackContext):
     update.message.reply_text(
-        text=msg_json["msg_cabinet"]
+        text=msg_json["msg_cabinet"],
+        parse_mode=ParseMode.HTML
     )
 
 
 def button_cabinet_master_handler(update: Update, context: CallbackContext):
     update.message.reply_text(
-        text=msg_json["msg_cabinet_master"]
+        text=msg_json["msg_cabinet_master"],
+        parse_mode=ParseMode.HTML
     )
 
 
