@@ -27,10 +27,10 @@ def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
         rate1 = float(rate1)
         rate2 = float(rate2)
         rate3 = float(rate3)
-        rate4 = float(rate4) * 200 / 12
+        rate4 = float(rate4)
 
         if rate1 < 100.0 or rate1 > 200.0 or rate2 < 100.0 or rate2 > 200.0 or \
-                rate3 < 100.0 or rate3 > 200.0 or rate4 < 100.0 or rate4 > 200.0:
+                rate3 < 100.0 or rate3 > 200.0 or rate4 < 0.0 or rate4 > 12.0:
             raise Exception('Неправильні дані')
 
     except:
@@ -43,7 +43,8 @@ def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
     for position in subjects:
         result += float(list(subjects[position].values())[0]) * float(rates[i])
         i += 1
-    result += 0.1 * float(rates[3])
+
+    result += 0.1 * (100 + (float(rates[3]) - 2) * 10)
 
     return round(result, 3)
 
