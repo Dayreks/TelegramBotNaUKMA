@@ -24,10 +24,10 @@ def get_subject(faculty, speciality):
 
 def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
     try:
-        rate1 = float(rate1)
-        rate2 = float(rate2)
-        rate3 = float(rate3)
-        rate4 = float(rate4)
+        rate1 = float(rate1.replace(',', '.'))
+        rate2 = float(rate2.replace(',', '.'))
+        rate3 = float(rate3.replace(',', '.'))
+        rate4 = float(rate4.replace(',', '.'))
 
         if rate1 < 100.0 or rate1 > 200.0 or rate2 < 100.0 or rate2 > 200.0 or \
                 rate3 < 100.0 or rate3 > 200.0 or rate4 < 0.0 or rate4 > 12.0:
