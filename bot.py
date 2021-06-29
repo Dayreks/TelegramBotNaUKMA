@@ -1,7 +1,7 @@
 import pathlib
 
 from Rating import get_speciality, calculate_final_rate, set_faculty, calculate_rate, button_rating_handler, set_rate1, \
-    set_rate2, set_rate3, set_rate4, callback_query_questions_handler
+    set_rate2, set_rate3, set_rate4, callback_query_questions_handler, set_rate5
 from documents import button_documents_handler, button_queue_add, button_queue_check, button_queue_link, button_dates, \
     button_add_name_handler, button_add_department_handler, button_add_phone_handler, button_queue_handler, \
     button_add_handler, button_check_handler, button_queue_link_handler, button_required, \
@@ -164,6 +164,8 @@ def message_handler(update: Update, context: CallbackContext):
         return set_rate3(update=update, context=context)
     if state == UserState.SET_RATE4:
         return set_rate4(update=update, context=context)
+    if state == UserState.SET_RATE5:
+        return set_rate5(update=update, context=context)
     if state == UserState.BACHELOR_NAME_STATE:
         return button_add_name_handler(update=update, context=context)
     if state == UserState.BACHELOR_DEPARTMENT_STATE:

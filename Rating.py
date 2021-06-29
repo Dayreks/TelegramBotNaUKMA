@@ -18,33 +18,39 @@ def get_subject(faculty, speciality):
     subjects_arr = []
     for key in subjects:
         for subject in subjects[key]:
-            subjects_arr.append(subject)
+            if subject != "Коефіцієнт" and subject != "атестат":
+                subjects_arr.append(subject)
     return subjects_arr
 
 
-def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4):
+def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4, rate5):
     try:
         rate1 = float(rate1.replace(',', '.'))
         rate2 = float(rate2.replace(',', '.'))
         rate3 = float(rate3.replace(',', '.'))
         rate4 = float(rate4.replace(',', '.'))
+        rate5 = float(rate5.replace(',', '.'))
 
         if rate1 < 100.0 or rate1 > 200.0 or rate2 < 100.0 or rate2 > 200.0 or \
-                rate3 < 100.0 or rate3 > 200.0 or rate4 < 0.0 or rate4 > 12.0:
+                rate3 < 100.0 or rate3 > 200.0 or rate4 < 0.0 or rate4 > 12.0 or (rate5 < 100 and rate5 != 0) or rate5 > 200:
             raise Exception('Неправильні дані')
 
     except:
         return "Неправильні дані"
-    rates = [rate1, rate2, rate3, rate4]
+    rates = [rate1, rate2, rate3, rate5, rate4]
     result = 0
     subjects = coef[faculty][speciality]
 
     i = 0
     for position in subjects:
+        print(str(list(subjects[position].values())[0]) + " " + str(rates[1]))
         result += float(list(subjects[position].values())[0]) * float(rates[i])
         i += 1
 
-    result += 0.1 * (100 + (float(rates[3]) - 2) * 10)
+    kef = 0.1
+    if "Атестат" in coef[faculty][speciality]:
+        kef = 0.05
+    result += kef * (100 + (float(rates[4]) - 2) * 10)
 
     return round(result, 3)
 
@@ -128,12 +134,31 @@ def set_rate3(update: Update, context: CallbackContext):
 
 
 def set_rate4(update: Update, context: CallbackContext):
+    context.chat_data.update(rate4=update.message.text)
+    if "Підготовчі курси" in coef[context.chat_data.get("faculty")][context.chat_data.get("speciality")]:
+        update.effective_message.reply_text(text="Введіть бал за підготовчі курси")
+        context.chat_data.update(state=UserState.SET_RATE5)
+    else:
+        context.chat_data.update(rate5=0, state=UserState.NULL_STATE)
+        update.effective_message.reply_text(text=calculate_final_rate(
+            context.chat_data.get("faculty"),
+            context.chat_data.get("speciality"),
+            context.chat_data.get("rate1"),
+            context.chat_data.get("rate2"),
+            context.chat_data.get("rate3"),
+            context.chat_data.get("rate4"),
+            "0"
+        ))
+
+
+def set_rate5(update: Update, context: CallbackContext):
     update.effective_message.reply_text(text=calculate_final_rate(
         context.chat_data.get("faculty"),
         context.chat_data.get("speciality"),
         context.chat_data.get("rate1"),
         context.chat_data.get("rate2"),
         context.chat_data.get("rate3"),
+        context.chat_data.get("rate4"),
         update.message.text
     ))
     context.chat_data.update(state=UserState.NULL_STATE)
