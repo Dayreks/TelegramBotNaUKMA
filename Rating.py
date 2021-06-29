@@ -18,7 +18,7 @@ def get_subject(faculty, speciality):
     subjects_arr = []
     for key in subjects:
         for subject in subjects[key]:
-            if subject != "Коефіцієнт" and subject != "атестат":
+            if subject != "Коефіцієнт" and subject != "атестат" and subject != "Підготовчі курси":
                 subjects_arr.append(subject)
     return subjects_arr
 
