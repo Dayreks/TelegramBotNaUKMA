@@ -18,7 +18,7 @@ def get_subject(faculty, speciality):
     subjects_arr = []
     for key in subjects:
         for subject in subjects[key]:
-            if subject != "Коефіцієнт" and subject != "атестат":
+            if subject != "Коефіцієнт" and subject != "атестат" and subject != "Підготовчі курси":
                 subjects_arr.append(subject)
     return subjects_arr
 
@@ -43,7 +43,6 @@ def calculate_final_rate(faculty, speciality, rate1, rate2, rate3, rate4, rate5)
 
     i = 0
     for position in subjects:
-        print(str(list(subjects[position].values())[0]) + " " + str(rates[1]))
         result += float(list(subjects[position].values())[0]) * float(rates[i])
         i += 1
 
@@ -136,7 +135,7 @@ def set_rate3(update: Update, context: CallbackContext):
 def set_rate4(update: Update, context: CallbackContext):
     context.chat_data.update(rate4=update.message.text)
     if "Підготовчі курси" in coef[context.chat_data.get("faculty")][context.chat_data.get("speciality")]:
-        update.effective_message.reply_text(text="Введіть бал за підготовчі курси")
+        update.effective_message.reply_text(text="Введіть бал за підготовчі курси (у форматі ЗНО) ")
         context.chat_data.update(state=UserState.SET_RATE5)
     else:
         context.chat_data.update(rate5=0, state=UserState.NULL_STATE)
