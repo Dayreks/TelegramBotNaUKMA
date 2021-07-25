@@ -6,9 +6,10 @@ from enum import Enum
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SERVICE_ACCOUNT_FILE = 'keys.json'
-SAMPLE_SPREADSHEET_ID = '1Frcbgjv5cHeauL8ZFzVCpVRFkEqevaTu0qEhhqY8bck'
+SAMPLE_SPREADSHEET_ID_BUDGET = '1jsgV24aj54nxVcbkaNTyF6Nu2vV_eGDIFdf2skjI7mU'
+SAMPLE_SPREADSHEET_ID_CONTRACT = '1viJe4xpl8NsLXUfK5g8DOphP5xFeF6vIw30nr-Sni04'
 
-BACHELOR_RANGE = "bachelor!A1:E1000"
+BACHELOR_RANGE = "Bachelor_budget!A1:Y1000"
 MASTER_RANGE = "master!A1:У1000"
 
 credentials = service_account.Credentials.from_service_account_file(
@@ -22,39 +23,35 @@ class UserType(Enum):
     MASTER = "MASTER"
 
 
-def add_to_table(chat_id, name, faculty, phone):
-    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=BACHELOR_RANGE).execute()
-    values = result.get('values', [])
+# def add_to_table(chat_id, name, faculty, phone):
+#     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=BACHELOR_RANGE).execute()
+#     values = result.get('values', [])
+#
+#     for value in values:
+#         if str(chat_id) == str(value[0]):
+#             return False
+#
+#     data = [[chat_id, name, faculty, phone, "false"]]
+#     request = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+#                                     range=BACHELOR_RANGE,
+#                                     valueInputOption="USER_ENTERED",
+#                                     insertDataOption='INSERT_ROWS',
+#                                     body={"values": data}).execute()
+#     return True
 
-    for value in values:
-        if str(chat_id) == str(value[0]):
-            return False
 
-    data = [[chat_id, name, faculty, phone, "false"]]
-    request = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                    range=BACHELOR_RANGE,
-                                    valueInputOption="USER_ENTERED",
-                                    insertDataOption='INSERT_ROWS',
-                                    body={"values": data}).execute()
-    return True
-
-
-def check_in_queue(chat_id):
-    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=BACHELOR_RANGE).execute()
+def check_in_queue(user_name):
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID_BUDGET, range=BACHELOR_RANGE).execute()
     values = result.get('values', [])
 
     i = 0
-    chat_id = str(chat_id)
+    user_name = str(user_name)
     for value in values:
-        id = str(value[0])
-        flag = str(value[4])
-        if chat_id != id and flag == "FALSE":
+        name = str(value[1])
+        if user_name != name:
             i += 1
-        elif chat_id == id and flag == "FALSE":
-            i += 1
+        elif user_name == name:
             return i
-        elif chat_id == id and flag == "TRUE":
-            return 0
 
     return -1
 

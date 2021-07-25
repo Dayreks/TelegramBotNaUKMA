@@ -10,8 +10,8 @@ faculty_json = source["btn"]["fac_list"]
 
 coef = json.load(open("source/coef.json", encoding='utf-8'))
 
-API_TOKEN = '1823506707:AAGJRr5WMrJGtiqLlGL6MzqVEZpgie0f2Xs'
-#API_TOKEN = '1698570040:AAGvmUeVtpTKw18dn-VlTUAXDT04vWp-uhI'
+#API_TOKEN = '1823506707:AAGJRr5WMrJGtiqLlGL6MzqVEZpgie0f2Xs'
+API_TOKEN = '1698570040:AAGvmUeVtpTKw18dn-VlTUAXDT04vWp-uhI'
 
 
 class UserState(Enum):
@@ -33,4 +33,5 @@ class UserState(Enum):
     SET_RATE5 = "SET_RATE5"
     BACHELOR_QUESTIONS = "BACHELOR_QUESTIONS"
     MASTER_QUESTIONS = "MASTER_QUESTIONS"
+    SET_NAME_QUEUE = "SET_NAME_QUEUE"
     

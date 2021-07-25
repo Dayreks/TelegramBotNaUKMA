@@ -1,11 +1,14 @@
 from source import msg_json, btn_json, UserState
-from tables import check_in_queue, add_to_table
+from tables import check_in_queue
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ParseMode
 from telegram.ext import CallbackContext
 
 button_queue_add = btn_json["btn_queue_add"]
-button_queue_check = btn_json["btn_queue_check"]
+button_queue_check_budget = btn_json["btn_queue_check_budget"]
+button_queue_check_contract = btn_json["btn_queue_check_contract"]
+button_queue_link_budget = btn_json["btn_queue_link_budget"]
 button_queue_link = btn_json["btn_queue_link"]
+button_queue_link_contract = btn_json["btn_queue_link_contract"]
 button_dates = btn_json["btn_dates"]
 button_required = btn_json["btn_documents"]
 button_back_bachelor = btn_json["btn_back"]
@@ -18,18 +21,13 @@ def button_documents_handler(update: Update, context: CallbackContext):
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
+                KeyboardButton(text=button_required)
+            ],
+            [
                 KeyboardButton(text=button_cabinet),
                 KeyboardButton(text=button_originals),
             ],
             [
-                KeyboardButton(text=button_required)
-            ],
-            [
-                KeyboardButton(text=button_queue_add),
-                KeyboardButton(text=button_queue_check),
-            ],
-            [
-                KeyboardButton(text=button_queue_link),
                 KeyboardButton(text=btn_json["btn_back_questions"])
             ]
         ],
@@ -101,31 +99,30 @@ def button_required_handler(update: Update, context: CallbackContext):
 
 # QUEUE FUNCTION !!!
 def button_queue_handler(update: Update, context: CallbackContext):
+    available = True
     reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
-                KeyboardButton(text=button_queue_add),
-                KeyboardButton(text=button_queue_check)
+                KeyboardButton(text=button_queue_link_budget),
+                KeyboardButton(text=button_queue_link_contract),
             ],
             [
-                KeyboardButton(text=button_back_bachelor),
-                KeyboardButton(text=button_queue_link)
+                KeyboardButton(text=button_queue_check_budget),
+                KeyboardButton(text=button_queue_check_contract),
+            ],
+            [
+                KeyboardButton(text=button_queue_link),
+            ],
+            [
+                KeyboardButton(text=btn_json["btn_back_questions"])
             ]
         ],
         resize_keyboard=True,
     )
-    update.message.reply_text(
-        text=msg_json["msg_queue"],
-        reply_markup=reply_markup,
-    )
-
-
-def button_queue_link_handler(update: Update, context: CallbackContext):
-    available = False
     if available:
         update.message.reply_text(
-            text=msg_json["msg_queue_link"],
-            parse_mode=ParseMode.HTML,
+            text=msg_json["msg_queue"],
+            reply_markup=reply_markup,
         )
     else:
         update.message.reply_text(
@@ -134,8 +131,30 @@ def button_queue_link_handler(update: Update, context: CallbackContext):
         )
 
 
+def button_queue_link_handler_budget(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_queue_link_budget"],
+        parse_mode=ParseMode.HTML,
+    )
+
+
+def button_queue_link_handler_contract(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_queue_link_contract"],
+        parse_mode=ParseMode.HTML,
+    )
+
+
+def button_queue_link_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_queue_links"],
+        parse_mode=ParseMode.HTML,
+    )
+
+
 def button_check_handler(update: Update, context: CallbackContext):
-    number = check_in_queue(update.message.chat_id)
+    context.chat_data.update(state=UserState.NULL_STATE)
+    number = check_in_queue(update.message.text)
     if number == -1:
         update.message.reply_text(msg_json["msg_not_in_queue"])
     elif number == 0:
@@ -144,9 +163,9 @@ def button_check_handler(update: Update, context: CallbackContext):
         update.message.reply_text(msg_json["msg_queue_number"].format(number))
 
 
-def button_add_handler(update: Update, context: CallbackContext):
-    update.message.reply_text(text=msg_json["msg_queue_start"], parse_mode=ParseMode.HTML)
-    available = False
+"""def button_add_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(text=msg_json["msg_queue_name"], parse_mode=ParseMode.HTML)
+    available = True
     if available:
         context.chat_data.update(state=UserState.BACHELOR_NAME_STATE)
 
@@ -189,3 +208,4 @@ def parse_handler(update: Update, context: CallbackContext):
             update.message.reply_text(text=msg_json["msg_added"])
         else:
             update.message.reply_text(text=msg_json["msg_already_added"])
+"""
