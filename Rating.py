@@ -1,3 +1,4 @@
+from documents import button_check_handler
 from source import coef, faculty_json, UserState, msg_json, btn_json
 from telegram import KeyboardButton, ReplyKeyboardMarkup, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
@@ -172,15 +173,20 @@ def set_speciality(update: Update, context: CallbackContext):
     context.chat_data.update(state=UserState.SET_RATE1, speciality=speciality)
     update.effective_message.reply_text(text=(msg_json["msg_subject"].format(subject)))
 
+speciality_array = ["ФГН", "ФПвН", "Маркетинг/менеджмент", "Економіка/фінанси", "ФІ",
+                    "ФПРН", "Соціальна робота", "Міжнародні відносини", "Соціологія",
+                    "Психологія", "Журналістика(зв'язки з громадськістю)", "Політологія"]
 
 def callback_query_questions_handler(update: Update, context: CallbackContext):
     user = update.effective_user
     callback_data = update.callback_query.data
     chat_id = update.effective_message.chat_id
-
     message_id = update.effective_message.message_id
     update.effective_message.bot.deleteMessage(chat_id=chat_id, message_id=message_id)
 
+    if context.chat_data.get("state") == UserState.SET_SPECIALITY_QUEUE_CONTRACT:
+        context.chat_data.update(speciality_queue=speciality_array[int(callback_data)])
+        return button_check_handler(update=update, context=context, state=UserState.SET_SPECIALITY_QUEUE_CONTRACT)
     if context.chat_data.get("state") == UserState.SET_SPECIALITY:
         set_speciality(update=update, context=context)
         return

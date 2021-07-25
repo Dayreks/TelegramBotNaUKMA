@@ -152,15 +152,24 @@ def button_queue_link_handler(update: Update, context: CallbackContext):
     )
 
 
-def button_check_handler(update: Update, context: CallbackContext):
+def button_check_handler(update: Update, context: CallbackContext, state):
     context.chat_data.update(state=UserState.NULL_STATE)
-    number = check_in_queue(update.message.text)
+    number = check_in_queue(state, context=context)
     if number == -1:
-        update.message.reply_text(msg_json["msg_not_in_queue"])
+        if state == UserState.SET_SPECIALITY_QUEUE_CONTRACT:
+            update.effective_message.reply_text(msg_json["msg_not_in_queue"])
+        else:
+            update.message.reply_text(msg_json["msg_not_in_queue"])
     elif number == 0:
-        update.message.reply_text(msg_json["msg_queue_end"])
+        if state == UserState.SET_SPECIALITY_QUEUE_CONTRACT:
+            update.effective_message.reply_text(msg_json["msg_queue_end"])
+        else:
+            update.message.reply_text(msg_json["msg_queue_end"])
     else:
-        update.message.reply_text(msg_json["msg_queue_number"].format(number))
+        if state == UserState.SET_SPECIALITY_QUEUE_CONTRACT:
+            update.effective_message.reply_text(msg_json["msg_queue_number"].format(number))
+        else:
+            update.message.reply_text(msg_json["msg_queue_number"].format(number))
 
 
 """def button_add_handler(update: Update, context: CallbackContext):

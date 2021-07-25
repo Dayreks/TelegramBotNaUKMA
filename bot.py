@@ -1,7 +1,7 @@
 import pathlib
 
 from Rating import get_speciality, calculate_final_rate, set_faculty, calculate_rate, button_rating_handler, set_rate1, \
-    set_rate2, set_rate3, set_rate4, callback_query_questions_handler, set_rate5
+    set_rate2, set_rate3, set_rate4, callback_query_questions_handler, set_rate5, speciality_array
 from documents import button_documents_handler, button_queue_add, button_queue_check_budget, \
     button_queue_check_contract, button_queue_link_budget, button_queue_link_contract, button_dates, \
     button_check_handler, button_queue_link_handler_budget, button_queue_link_handler_contract, button_required, \
@@ -167,8 +167,13 @@ def message_handler(update: Update, context: CallbackContext):
         return set_rate4(update=update, context=context)
     if state == UserState.SET_RATE5:
         return set_rate5(update=update, context=context)
-    if state == UserState.SET_NAME_QUEUE:
-        return button_check_handler(update=update, context=context)
+    if state == UserState.SET_NAME_QUEUE_BUDGET:
+        context.chat_data.update(user_name=str(update.message.text))
+        return button_check_handler(update=update, context=context, state=state)
+    if state == UserState.SET_NAME_QUEUE_CONTRACT:
+        context.chat_data.update(user_name=str(update.message.text))
+        context.chat_data.update(state=UserState.SET_SPECIALITY_QUEUE_CONTRACT)
+        return buttons_table(update=update, context=context)
     """
     if state == UserState.BACHELOR_NAME_STATE:
         return button_add_name_handler(update=update, context=context)
@@ -238,13 +243,11 @@ def message_handler(update: Update, context: CallbackContext):
         # return button_add_handler(update=update, context=context)
     elif text == button_queue_check_budget:
         update.message.reply_text(text=msg_json["msg_queue_name"])
-        context.chat_data.update(state=UserState.SET_NAME_QUEUE)
+        context.chat_data.update(state=UserState.SET_NAME_QUEUE_BUDGET)
         # return button_check_handler(update=update, context=context)
     elif text == button_queue_check_contract:
-
-        ## CHECK FOR CONTRACT
-
-        return 0
+        update.message.reply_text(text=msg_json["msg_queue_name"])
+        context.chat_data.update(state=UserState.SET_NAME_QUEUE_CONTRACT)
     elif text == button_queue_link_budget:
         return button_queue_link_handler_budget(update=update, context=context)
     elif text == button_queue_link_contract:
@@ -305,6 +308,17 @@ def message_handler(update: Update, context: CallbackContext):
         return button_specialties_master_handler(update=update, context=context)
     elif text == button_fun:
         return button_fun_handler(update=update, context=context)
+
+
+
+
+
+def buttons_table(update: Update, context: CallbackContext):
+    inline_keyboard = []
+    for speciality in speciality_array:
+        inline_keyboard.append([InlineKeyboardButton(text=speciality, callback_data=speciality_array.index(speciality))])
+    update.message.reply_text(text="Оберість факультет/спеціальність",
+                              reply_markup=InlineKeyboardMarkup(inline_keyboard))
 
 
 def button_bachelor_handler(update: Update, context: CallbackContext):
