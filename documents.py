@@ -44,7 +44,6 @@ def button_documents_master_handler(update: Update, context: CallbackContext):
         keyboard=[
             [
                 KeyboardButton(text=button_cabinet_master),
-                # KeyboardButton(text=button_dates),
             ],
             [
                 KeyboardButton(text=button_required),
