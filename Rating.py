@@ -173,8 +173,8 @@ def set_speciality(update: Update, context: CallbackContext):
     context.chat_data.update(state=UserState.SET_RATE1, speciality=speciality)
     update.effective_message.reply_text(text=(msg_json["msg_subject"].format(subject)))
 
-speciality_array = ["ФГН", "ФПвН", "Маркетинг/менеджмент", "Економіка/фінанси", "ФІ",
-                    "ФПРН", "Соціальна робота", "Міжнародні відносини", "Соціологія",
+speciality_array = ["ФГН(Факультет гуманітарних наук)", "ФПвН(Факультет правничих наук)", "Маркетинг/менеджмент", "Економіка/фінанси", "ФІ(Факультет інформатики)",
+                    "ФПРН(Факультет природничих наук)", "Соціальна робота", "Міжнародні відносини", "Соціологія",
                     "Психологія", "Журналістика(зв'язки з громадськістю)", "Політологія"]
 
 def callback_query_questions_handler(update: Update, context: CallbackContext):
