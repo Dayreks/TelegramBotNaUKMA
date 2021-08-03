@@ -15,6 +15,7 @@ button_back_bachelor = btn_json["btn_back"]
 button_cabinet = btn_json["btn_cabinet"]
 button_cabinet_master = btn_json["btn_cabinet_master"]
 button_originals = btn_json["btn_originals"]
+button_originals_master = btn_json["btn_originals_master"]
 
 
 def button_documents_handler(update: Update, context: CallbackContext):
@@ -47,7 +48,7 @@ def button_documents_master_handler(update: Update, context: CallbackContext):
             ],
             [
                 KeyboardButton(text=button_required),
-                KeyboardButton(text=button_originals)
+                KeyboardButton(text=button_originals_master)
             ],
             [
                 KeyboardButton(text=btn_json["btn_back_questions_master"])
@@ -83,6 +84,14 @@ def button_cabinet_master_handler(update: Update, context: CallbackContext):
 def button_originals_handler(update: Update, context: CallbackContext):
     update.message.reply_text(
         text=msg_json["msg_originals"],
+        parse_mode=ParseMode.HTML,
+        disable_web_page_preview=True
+    )
+
+
+def button_originals_master_handler(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        text=msg_json["msg_originals_master"],
         parse_mode=ParseMode.HTML,
         disable_web_page_preview=True
     )

@@ -1,7 +1,6 @@
 import json
 from enum import Enum
 
-
 source = json.load(open("source/source.json", encoding='utf-8'))
 btn_json = source["btn"]
 
@@ -11,7 +10,7 @@ faculty_json = source["btn"]["fac_list"]
 coef = json.load(open("source/coef.json", encoding='utf-8'))
 
 API_TOKEN = '1823506707:AAGJRr5WMrJGtiqLlGL6MzqVEZpgie0f2Xs'
-# API_TOKEN = '1698570040:AAGvmUeVtpTKw18dn-VlTUAXDT04vWp-uhI'
+#API_TOKEN = '1698570040:AAGvmUeVtpTKw18dn-VlTUAXDT04vWp-uhI'
 
 
 class UserState(Enum):
@@ -21,7 +20,7 @@ class UserState(Enum):
     BACHELOR_PHONE_STATE = "BACHELOR_PHONE_STATE"
     MASTER_WAITING_STATE = "MASTER_WAITING_STATE"
     BACHELOR_ADD_STATE = "BACHELOR_ADD_STATE"
-    NULL_STATE ="NULL_STATE"
+    NULL_STATE = "NULL_STATE"
     EXAM_PTS_ENTRY_STATE = "EXAM_PTS_ENTRY_STATE"
     SET_FACULTY = "SET_FACULTY"
     SET_SPECIALITY = "SET_SPECIALITY"
@@ -36,4 +35,3 @@ class UserState(Enum):
     SET_NAME_QUEUE_BUDGET = "SET_NAME_QUEUE_BUDGET"
     SET_NAME_QUEUE_CONTRACT = "SET_NAME_QUEUE_CONTRACT"
     SET_SPECIALITY_QUEUE_CONTRACT = "SET_SPECIALITY_QUEUE_CONTRACT"
-    

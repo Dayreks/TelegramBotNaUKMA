@@ -6,7 +6,8 @@ from documents import button_documents_handler, button_queue_add, button_queue_c
     button_queue_check_contract, button_queue_link_budget, button_queue_link_contract, button_dates, \
     button_check_handler, button_queue_link_handler_budget, button_queue_link_handler_contract, button_required, \
     button_required_handler, button_cabinet_handler, button_originals_handler, button_cabinet_master_handler, \
-    button_documents_master_handler, button_queue_handler, button_queue_link, button_queue_link_handler
+    button_documents_master_handler, button_queue_handler, button_queue_link, button_queue_link_handler, \
+    button_originals_master, button_originals_master_handler
 from questions import button_questions_handler_bachelor, button_questions_handler_master, details_handler, \
     button_operator_handler, button_rozklad, button_registration, button_prep, button_dpa_zno, \
     button_specifics, button_results, button_additional, all_button_information_handler, button_points, button_cost, \
@@ -271,6 +272,8 @@ def message_handler(update: Update, context: CallbackContext):
         return button_required_handler(update=update, context=context)
     elif text == button_originals:
         return button_originals_handler(update=update, context=context)
+    elif text == button_originals_master:
+        return button_originals_master_handler(update=update, context=context)
 
     ############################################################
 
